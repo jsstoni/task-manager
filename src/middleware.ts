@@ -1,9 +1,17 @@
 import { withAuth } from "next-auth/middleware";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const authMiddleware = withAuth({});
+const authMiddleware = withAuth({
+    pages: { signIn: "/auth/signin" }
+});
+
+const isPublic = ["/auth/signup"];
 
 export default function middleware(request: NextRequest) {
+    const { nextUrl: { pathname } } = request;
+    if (isPublic.includes(pathname)) {
+        return NextResponse.next();
+    }
     return (authMiddleware as any)(request);
 }
 
