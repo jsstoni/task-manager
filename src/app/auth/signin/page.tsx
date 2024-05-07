@@ -10,8 +10,8 @@ export default function Signin() {
 
   async function login(formData: FormData) {
     const res = await signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
       redirect: false,
     });
     if (res && res.error) {
