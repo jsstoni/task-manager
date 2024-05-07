@@ -1,11 +1,15 @@
+import { Button, Input } from "@/components";
+
 export default function Signin() {
   return (
-    <form action="" className="flex flex-col">
+    <form action="" className="flex flex-col w-full">
       <label htmlFor="">Email</label>
-      <input type="text" />
+      <Input type="text" />
+
       <label htmlFor="">Password</label>
-      <input type="password" />
-      <button>Login</button>
+      <Input type="password" />
+
+      <Button>Login</Button>
     </form>
   );
 }

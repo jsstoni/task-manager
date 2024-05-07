@@ -4,7 +4,7 @@ interface Props {
 
 export default function LayoutAuth({ children }: Props) {
   return (
-    <main className="h-screen flex flex-col justify-center items-center">
+    <main className="h-screen max-w-xs mx-auto flex flex-col justify-center items-center">
       {children}
     </main>
   );
