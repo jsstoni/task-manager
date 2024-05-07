@@ -1,3 +1,4 @@
+export * from './form-error';
 export * from './ui/button';
 export * from './ui/input';
 export * from './ui/switch-theme';
