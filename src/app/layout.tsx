@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "@/redux";
 import { ThemeProvider } from "next-themes";
 
+import "../../config/index";
 import "./assets/globals.css";
 
 export const metadata: Metadata = {
