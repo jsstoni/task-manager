@@ -3,12 +3,9 @@ import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
 export function StagesCards() {
   return (
     <article className="dark:bg-zinc-900 p-4 rounded-md flex flex-col gap-2 border dark:border-zinc-800 hover:dark:border-slate-800">
-      <strong className="text-sm">
+      <p className="text-sm text-balance">
         Lorem ipsum dolor sit amet consectetur adipisicing elit
-      </strong>
-      <small className="dark:text-zinc-600 line-clamp-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam deleniti
-      </small>
+      </p>
 
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2 text-xs text-zinc-600">
