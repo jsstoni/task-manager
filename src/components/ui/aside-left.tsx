@@ -13,7 +13,7 @@ export function AsideLeft() {
     <aside className="aside fixed inset-y-0 left-0 border-r dark:border-zinc-900">
       <ul className="flex flex-col items-center justify-center p-2 h-full pb-5">
         <li className="mb-5">
-          <Logo size={40} />
+          <Logo size={35} />
         </li>
         <li
           className={cn({
