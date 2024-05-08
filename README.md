@@ -14,8 +14,8 @@
 
 - [x] Dashboard UI (board, card)
 - [ ] NavBar UI in dashboard
-- [ ] Aside UI left bar
-- [ ] Aside toggle theme
+- [x] Aside UI left bar
+- [x] Aside toggle theme
 - [ ] React-hook-form
 
 ## Support

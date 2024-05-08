@@ -2,7 +2,7 @@ import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
 
 export function StagesCards() {
   return (
-    <article className="dark:bg-zinc-900 p-3 rounded-md flex flex-col gap-2">
+    <article className="dark:bg-zinc-900 p-4 rounded-md flex flex-col gap-2 border dark:border-zinc-800 hover:dark:border-slate-800">
       <strong className="text-sm">
         Lorem ipsum dolor sit amet consectetur adipisicing elit
       </strong>

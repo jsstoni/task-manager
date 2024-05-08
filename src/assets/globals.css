@@ -20,4 +20,8 @@
   .columns-card:not(:last-child) {
     @apply border-r dark:border-zinc-900;
   }
+
+  .aside a {
+    @apply dark:text-white;
+  }
 }
