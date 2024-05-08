@@ -1,6 +1,9 @@
+"use client";
+
 import { Columns } from "@/utils/constant/tasks";
 import { cn } from "@/utils/libs/cn";
 import { StagesCards } from "./stages-cards";
+import { useBoard } from "@/utils/hooks";
 
 interface Props {
   column: Columns;
@@ -8,6 +11,8 @@ interface Props {
 }
 
 export function ColumnsCards({ column, loading }: Props) {
+  const { tasks } = useBoard();
+
   //column variant
   const cv = {
     Backlog: "border-l-4 border-zinc-400 px-4",
@@ -27,7 +32,9 @@ export function ColumnsCards({ column, loading }: Props) {
 
       {loading && <span>loading...</span>}
 
-      { !loading && column === "Backlog" && <StagesCards />}
+      {!loading &&
+        tasks &&
+        tasks.map((task) => <StagesCards key={task.id} task={task} />)}
     </section>
   );
 }
