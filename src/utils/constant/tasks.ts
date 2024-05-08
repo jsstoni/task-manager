@@ -10,4 +10,5 @@ export interface Tasks {
   log: number;
   duedate?: string;
   user_id: number;
+  column: Columns;
 }
