@@ -24,4 +24,8 @@
   .aside a {
     @apply dark:text-white;
   }
+
+  .aside a svg {
+    @apply w-[22px] h-[22px];
+  }
 }
