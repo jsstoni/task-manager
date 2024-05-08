@@ -3,7 +3,7 @@ import { Providers } from "@/redux";
 import { ThemeProvider } from "next-themes";
 
 import "../../config/index";
-import "./assets/globals.css";
+import "../assets/globals.css";
 
 export const metadata: Metadata = {
   title: "Vanto",
