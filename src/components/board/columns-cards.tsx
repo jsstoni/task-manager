@@ -34,7 +34,10 @@ export function ColumnsCards({ column, loading }: Props) {
 
       {!loading &&
         tasks &&
-        tasks.map((task) => <StagesCards key={task.id} task={task} />)}
+        tasks.map(
+          (task) =>
+            column === task.column && <StagesCards key={task.id} task={task} />
+        )}
     </section>
   );
 }
