@@ -1,4 +1,4 @@
-import { AsideLeft, ColumnsCards, TaskBoard } from "@/components";
+import { AsideLeft, ColumnsCards, NavBar, TaskBoard } from "@/components";
 import { Columns } from "@/utils/constant/tasks";
 
 export default function Home() {
@@ -7,7 +7,8 @@ export default function Home() {
   return (
     <>
       <AsideLeft />
-      <main className="relative ml-[70px] flex-grow">
+
+      <main className="relative ml-[60px] flex-grow">
         <TaskBoard>
           {columns.map((column, index) => (
             <ColumnsCards key={index} column={column} />
