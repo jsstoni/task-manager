@@ -1,15 +1,17 @@
 import { Tasks } from "@/utils/constant/tasks";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { boardService } from "../services";
 
 interface State {
   tasks: Tasks[];
   modalCreate: boolean;
+  idTask: number | null;
 }
 
 const initialState: State = {
   tasks: [],
-  modalCreate: false
+  modalCreate: false,
+  idTask: null
 }
 
 export const boardSlice = createSlice({
@@ -18,6 +20,12 @@ export const boardSlice = createSlice({
   reducers: {
     toggleCreate: (state) => {
       state.modalCreate = !state.modalCreate;
+    },
+    setIdTask: (state, action: PayloadAction<number>) => {
+      state.idTask = action.payload
+    },
+    clean: (state) => {
+      state.idTask = null;
     }
   },
   extraReducers: (builder) => {
@@ -39,6 +47,6 @@ export const boardSlice = createSlice({
   }
 });
 
-export const { toggleCreate } = boardSlice.actions
+export const { toggleCreate, setIdTask, clean } = boardSlice.actions
 
 export default boardSlice.reducer;
