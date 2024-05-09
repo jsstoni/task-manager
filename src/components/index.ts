@@ -3,6 +3,7 @@ export * from './board/stages-cards';
 export * from './board/task-board';
 export * from './form-error';
 export * from './form/form-login';
+export * from './form/form-register';
 export * from './ui/aside-left';
 export * from './ui/button';
 export * from './ui/input';
