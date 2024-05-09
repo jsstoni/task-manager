@@ -4,6 +4,8 @@ import { Tasks } from "@/utils/constant/tasks";
 import { useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
 import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 interface Props {
   task: Tasks;
@@ -11,6 +13,8 @@ interface Props {
 
 export function StagesCards({ task }: Props) {
   const { onDragStart, onDragEnd, idTask } = useDnD();
+  dayjs.extend(relativeTime);
+  const duedate = dayjs().from(task.duedate, true);
 
   return (
     <article
@@ -26,7 +30,7 @@ export function StagesCards({ task }: Props) {
 
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2 text-xs text-zinc-600">
-          <BsCalendarDate /> {task.duedate}
+          <BsCalendarDate /> {duedate}
         </div>
       </div>
 

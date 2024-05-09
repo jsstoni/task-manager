@@ -10,6 +10,7 @@
 - 🧩 Zod: Tool for validating data schemas in a simple yet powerful way.
 - 🌈 Next-Themes: Enables easy theming for your Next.js applications.
 - 📝 react-hook-form: Lightweight form validation library for React.
+- 📅 dayjs: Lightweight and immutable date-time library.
 
 ## To Do
 
