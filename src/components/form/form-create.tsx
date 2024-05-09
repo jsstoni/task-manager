@@ -3,7 +3,7 @@
 import { FormCreateType, formCreate } from "@/utils/constant/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, FormError, Input, Textarea } from "@/components";
+import { Button, FormError, Input, Select, Textarea } from "@/components";
 import { useCreateTaskMutation } from "@/redux";
 import { Tasks } from "@/utils/constant/tasks";
 
@@ -36,11 +36,7 @@ export function FormCreate() {
       <FormError value={errors.content} />
 
       <label htmlFor="">Priority</label>
-      <select {...register("priority")}>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
+      <Select options={["low", "medium", "high"]} {...register("priority")} />
       <FormError value={errors.priority} />
 
       <label htmlFor="">Due Date</label>
