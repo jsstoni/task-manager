@@ -13,10 +13,14 @@
 ## To Do
 
 - [x] Dashboard UI (board, card)
-- [ ] NavBar UI in dashboard
-- [x] Aside UI left bar
-- [x] Aside toggle theme
+- [x] NavBar UI in dashboard
+- [ ] NavBar -> button (filter, sort)
 - [ ] React-hook-form
+- [ ] forms for login, register and create task
+- [ ] API Board GET, PUT, POST
+GET: // get the tasks
+PUT: //update column
+POST: // create task
 
 ## Support
 
