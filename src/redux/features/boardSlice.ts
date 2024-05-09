@@ -4,16 +4,21 @@ import { boardService } from "../services";
 
 interface State {
   tasks: Tasks[];
+  modalCreate: boolean;
 }
 
 const initialState: State = {
-  tasks: []
+  tasks: [],
+  modalCreate: false
 }
 
 export const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
+    toggleCreate: (state) => {
+      state.modalCreate = !state.modalCreate;
+    }
   },
   extraReducers: (builder) => {
     // You will get the tasks when you complete the API call
@@ -26,6 +31,6 @@ export const boardSlice = createSlice({
   }
 });
 
-export const { } = boardSlice.actions
+export const { toggleCreate } = boardSlice.actions
 
 export default boardSlice.reducer;

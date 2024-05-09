@@ -1,29 +1,37 @@
 "use client";
 
-import React from "react";
 import { NavBar } from "../ui/nav-bar";
-import { useGetTasksQuery } from "@/redux";
+import { toggleCreate, useGetTasksQuery } from "@/redux";
 import type { Columns } from "@/utils/constant/tasks";
-import { ColumnsCards } from "@/components";
+import { ColumnsCards, Modal } from "@/components";
+import { useAppDispatch, useBoard } from "@/utils/hooks";
 
-interface Props {
-  children?: React.ReactNode;
-}
+interface Props {}
 
-export function TaskBoard({ children }: Props) {
+export function TaskBoard({}: Props) {
+  const dispatch = useAppDispatch();
   const { isLoading } = useGetTasksQuery(null);
+  const { modalCreate } = useBoard();
 
   const columns: Columns[] = ["Backlog", "In Progress", "Test", "Done"];
 
   return (
-    <div className="flex flex-col justify-between h-screen">
-      <NavBar />
+    <>
+      <div className="flex flex-col justify-between h-screen">
+        <NavBar />
 
-      <section className="flex justify-between flex-grow">
-        {columns.map((column, index) => (
-          <ColumnsCards key={index} column={column} loading={isLoading} />
-        ))}
-      </section>
-    </div>
+        <section className="flex justify-between flex-grow">
+          {columns.map((column, index) => (
+            <ColumnsCards key={index} column={column} loading={isLoading} />
+          ))}
+        </section>
+      </div>
+
+      <Modal
+        title="Create Task"
+        isOpen={modalCreate}
+        close={() => dispatch(toggleCreate())}
+      ></Modal>
+    </>
   );
 }
