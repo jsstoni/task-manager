@@ -1,9 +1,10 @@
-import { clean, setIdTask } from "@/redux";
+import { clean, setIdTask, setWhereMove } from "@/redux";
 import { useAppDispatch, useBoard } from "@/utils/hooks"
+import { Columns } from "../constant/tasks";
 
 export function useDnD() {
   const dispatch = useAppDispatch();
-  const { idTask } = useBoard();
+  const { idTask, whereMove } = useBoard();
 
   const onDragStart = (ev: React.DragEvent, id: number) => {
     dispatch(setIdTask(id));
@@ -17,9 +18,10 @@ export function useDnD() {
 
   const onDrop = (ev: React.DragEvent) => { }
 
-  const onDragOver = (ev: React.DragEvent) => {
+  const onDragOver = (ev: React.DragEvent, column: Columns) => {
+    dispatch(setWhereMove(column));
     ev.preventDefault();
   }
 
-  return { onDragStart, onDragEnd, onDrop, onDragOver, idTask };
+  return { onDragStart, onDragEnd, onDrop, onDragOver, idTask, whereMove };
 }
