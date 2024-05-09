@@ -1,18 +1,22 @@
 "use client";
 
-import { Columns } from "@/utils/constant/tasks";
+import { Columns, Tasks } from "@/utils/constant/tasks";
 import { cn } from "@/utils/libs/cn";
 import { StagesCards } from "./stages-cards";
-import { useBoard } from "@/utils/hooks";
+import { useMemo } from "react";
 
 interface Props {
   column: Columns;
   loading: boolean;
+  tasks: Tasks[];
 }
 
-export function ColumnsCards({ column, loading }: Props) {
-  const { tasks } = useBoard();
-
+export function ColumnsCards({ column, loading, tasks }: Props) {
+  //tasks by columns
+  const tasksByColumns = useMemo(
+    () => tasks.filter((task) => task.column === column),
+    [tasks, column]
+  );
   //column variant
   const cv = {
     Backlog: "border-l-4 border-zinc-400 px-4",
@@ -26,7 +30,7 @@ export function ColumnsCards({ column, loading }: Props) {
       <p className={cn("flex items-center", cv[column])}>
         {column}{" "}
         <small className="bg-zinc-200 dark:bg-zinc-900 px-2 ml-3 rounded-md">
-          0
+          {tasksByColumns.length}
         </small>
       </p>
 
@@ -34,10 +38,7 @@ export function ColumnsCards({ column, loading }: Props) {
 
       {!loading &&
         tasks &&
-        tasks.map(
-          (task) =>
-            column === task.column && <StagesCards key={task.id} task={task} />
-        )}
+        tasksByColumns.map((task) => <StagesCards key={task.id} task={task} />)}
     </section>
   );
 }

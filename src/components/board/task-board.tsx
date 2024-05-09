@@ -11,7 +11,7 @@ interface Props {}
 export function TaskBoard({}: Props) {
   const dispatch = useAppDispatch();
   const { isLoading } = useGetTasksQuery(null);
-  const { modalCreate } = useBoard();
+  const { tasks, modalCreate } = useBoard();
 
   const columns: Columns[] = ["Backlog", "In Progress", "Test", "Done"];
 
@@ -22,7 +22,12 @@ export function TaskBoard({}: Props) {
 
         <section className="flex justify-between flex-grow">
           {columns.map((column, index) => (
-            <ColumnsCards key={index} column={column} loading={isLoading} />
+            <ColumnsCards
+              key={index}
+              tasks={tasks}
+              column={column}
+              loading={isLoading}
+            />
           ))}
         </section>
       </div>
