@@ -25,8 +25,16 @@ export const boardSlice = createSlice({
     builder.addMatcher(
       boardService.endpoints.getTasks.matchFulfilled,
       (state, { payload }) => {
-        state.tasks = payload.tasks
+        state.tasks = payload
       }
+    );
+
+    // get the task created after completing
+    builder.addMatcher(
+      boardService.endpoints.createTask.matchFulfilled,
+      (state, { payload }) => {
+        state.tasks.push(payload);
+      },
     );
   }
 });

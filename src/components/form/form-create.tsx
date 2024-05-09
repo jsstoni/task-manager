@@ -4,6 +4,8 @@ import { FormCreateType, formCreate } from "@/utils/constant/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button, FormError, Input, Textarea } from "@/components";
+import { useCreateTaskMutation } from "@/redux";
+import { Tasks } from "@/utils/constant/tasks";
 
 export function FormCreate() {
   const {
@@ -12,7 +14,16 @@ export function FormCreate() {
     formState: { errors },
   } = useForm<FormCreateType>({ resolver: zodResolver(formCreate) });
 
-  const onSubmit: SubmitHandler<FormCreateType> = async (data) => {};
+  const [submitTask, { isLoading }] = useCreateTaskMutation();
+
+  const onSubmit: SubmitHandler<FormCreateType> = async (data) => {
+    try {
+      const task: Partial<Tasks> = { column: "Backlog", log: 0, ...data };
+      await submitTask(task).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">

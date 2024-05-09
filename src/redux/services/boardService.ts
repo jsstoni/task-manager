@@ -1,10 +1,6 @@
 import type { Tasks } from "@/utils/constant/tasks"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-type Board = {
-  tasks: Tasks[]
-}
-
 export const boardService = createApi({
   reducerPath: "board_api",
   baseQuery: fetchBaseQuery({
@@ -12,8 +8,13 @@ export const boardService = createApi({
   }),
   endpoints: (builder) => ({
     // get tasks from api
-    getTasks: builder.query<Board, null>({ query: () => "/board" })
+    getTasks: builder.query<Tasks[], null>({ query: () => "/board" }),
+
+    // post tasks from api
+    createTask: builder.mutation<Tasks, Partial<Tasks>>({
+      query: (created) => ({ url: "/board", method: "POST", body: created }),
+    }),
   })
 });
 
-export const { useGetTasksQuery } = boardService;
+export const { useGetTasksQuery, useCreateTaskMutation } = boardService;
