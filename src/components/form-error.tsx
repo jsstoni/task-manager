@@ -1,11 +1,9 @@
+import { FieldError } from "react-hook-form";
+
 interface Props {
-  value: any;
-  name: string;
+  value: FieldError | undefined;
 }
 
-export function FormError({ value, name }: Props) {
-  return (
-    value &&
-    value.errors && <small className="text-red-500">{value.errors[name]}</small>
-  );
-}
+export const FormError = ({ value }: Props) => {
+  return value && <p className="text-xs text-red-500">{value.message}</p>;
+};
