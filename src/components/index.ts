@@ -1,3 +1,4 @@
+export * from './board/badge-priority';
 export * from './board/columns-cards';
 export * from './board/stages-cards';
 export * from './board/task-board';

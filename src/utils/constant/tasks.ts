@@ -6,7 +6,7 @@ export interface Tasks {
   id: number;
   title: string;
   content: string;
-  priority: string;
+  priority: Priority;
   log: number;
   duedate?: string;
   user_id: number;

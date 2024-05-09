@@ -6,6 +6,7 @@ import { cn } from "@/utils/libs/cn";
 import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { BadgePriority } from "./badge-priority";
 
 interface Props {
   task: Tasks;
@@ -35,10 +36,10 @@ export function StagesCards({ task }: Props) {
       </div>
 
       <div className="flex items-center gap-2">
-        <small className="rounded-md bg-blue-400 px-3 text-black">
-          {task.priority}
-        </small>
+        <BadgePriority value={task.priority} />
+
         <small>Log: {task.log}</small>
+
         <small className="ml-auto flex items-center gap-1">
           <BsCheck2Square /> 0/1
         </small>
