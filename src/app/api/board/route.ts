@@ -10,7 +10,10 @@ export async function GET() {
     const tasks = await prisma.tasks.findMany({
       where: {
         user_id: session.userId
-      }
+      },
+      orderBy: {
+        updatedAt: "asc",
+      },
     });
 
     return NextResponse.json(tasks, { status: 200 });
@@ -39,7 +42,24 @@ export async function POST(request: Request) {
     return NextResponse.json(newTask, { status: 201 });
 
   } catch (error) {
-    let message = error instanceof Error ? process.env.NODE_ENV !== "production" ? error.message : "Create task error" : "Unexpected Error";
+    let message = error instanceof Error ? process.env.NODE_ENV !== "production" ? error.message : "Created task error" : "Unexpected Error";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const session = await nextAuth();
+    const body = await request.json();
+
+    const updateTask = await prisma.tasks.update({
+      where: { id: body.id, user_id: session.userId },
+      data: { column: body.column },
+    });
+
+    return NextResponse.json(updateTask, { status: 200 });
+  } catch (error) {
+    let message = error instanceof Error ? process.env.NODE_ENV !== "production" ? error.message : "Updated task error" : "Unexpected Error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
