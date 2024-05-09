@@ -1,10 +1,10 @@
-import { clean, setIdTask, setWhereMove } from "@/redux";
+import { clean, setIdTask, setWhereMove, updateTasks } from "@/redux";
 import { useAppDispatch, useBoard } from "@/utils/hooks"
 import { Columns } from "../constant/tasks";
 
 export function useDnD() {
   const dispatch = useAppDispatch();
-  const { idTask, whereMove } = useBoard();
+  const { idTask, whereMove, tasks } = useBoard();
 
   const onDragStart = (ev: React.DragEvent, id: number) => {
     dispatch(setIdTask(id));
@@ -16,7 +16,23 @@ export function useDnD() {
     dispatch(clean());
   }
 
-  const onDrop = (ev: React.DragEvent) => { }
+  const onDrop = (ev: React.DragEvent) => {
+    ev.preventDefault();
+    const taskIndex = tasks.findIndex((task) => task.id === idTask);
+    let selectedTask = { ...tasks[taskIndex] };
+
+    if (selectedTask.column === whereMove) {
+      return;
+    }
+
+    selectedTask.column = whereMove as Columns;
+
+    const updated = tasks
+      .filter((task) => task.id !== idTask)
+      .concat(selectedTask);
+
+    dispatch(updateTasks(updated))
+  }
 
   const onDragOver = (ev: React.DragEvent, column: Columns) => {
     dispatch(setWhereMove(column));

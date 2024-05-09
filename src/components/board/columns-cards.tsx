@@ -13,7 +13,7 @@ interface Props {
 }
 
 export function ColumnsCards({ column, loading, tasks }: Props) {
-  const { onDragOver, onDragEnd, whereMove } = useDnD();
+  const { onDragOver, onDrop, onDragEnd, whereMove } = useDnD();
   //tasks by columns
   const tasksByColumns = useMemo(
     () => tasks.filter((task) => task.column === column),
@@ -31,6 +31,7 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
     <section
       className="columns-card flex-1 select-none flex flex-col gap-4 p-4"
       onDragOver={(ev) => onDragOver(ev, column)}
+      onDrop={onDrop}
       onDragEnd={(ev) => onDragEnd(ev)}
     >
       <p className={cn("flex items-center", cv[column])}>

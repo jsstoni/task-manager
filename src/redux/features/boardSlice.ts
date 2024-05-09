@@ -20,6 +20,10 @@ export const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
+    updateTasks: (state, action: PayloadAction<Tasks[]>) => {
+      state.tasks = action.payload;
+      boardSlice.caseReducers.clean(state);
+    },
     toggleCreate: (state) => {
       state.modalCreate = !state.modalCreate;
     },
@@ -53,6 +57,6 @@ export const boardSlice = createSlice({
   }
 });
 
-export const { toggleCreate, setIdTask, setWhereMove, clean } = boardSlice.actions
+export const { updateTasks, toggleCreate, setIdTask, setWhereMove, clean } = boardSlice.actions
 
 export default boardSlice.reducer;
