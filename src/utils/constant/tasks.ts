@@ -11,4 +11,6 @@ export interface Tasks {
   duedate?: string;
   user_id: number;
   column: Columns;
+  createdAt: string;
+  updatedAt: string;
 }
