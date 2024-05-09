@@ -3,7 +3,7 @@
 import { NavBar } from "../ui/nav-bar";
 import { toggleCreate, useGetTasksQuery } from "@/redux";
 import type { Columns } from "@/utils/constant/tasks";
-import { ColumnsCards, Modal } from "@/components";
+import { ColumnsCards, FormCreate, Modal } from "@/components";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
 
 interface Props {}
@@ -31,7 +31,9 @@ export function TaskBoard({}: Props) {
         title="Create Task"
         isOpen={modalCreate}
         close={() => dispatch(toggleCreate())}
-      ></Modal>
+      >
+        <FormCreate />
+      </Modal>
     </>
   );
 }

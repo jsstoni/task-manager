@@ -2,6 +2,7 @@ export * from './board/columns-cards';
 export * from './board/stages-cards';
 export * from './board/task-board';
 export * from './form-error';
+export * from './form/form-create';
 export * from './form/form-login';
 export * from './form/form-register';
 export * from './ui/aside-left';

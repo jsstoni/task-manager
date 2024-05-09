@@ -16,3 +16,15 @@ export const formRegister = z.object({
 );
 
 export type FormRegisterType = z.infer<typeof formRegister>;
+
+export const formCreate = z.object({
+  title: z.string().trim().min(1, { message: "Name is required" }).max(60),
+  priority: z.enum(["low", "medium", "high"]),
+  content: z.string().min(1, { message: "Description is required" }),
+  duedate: z.string().min(1).transform((value) => {
+    const formatDate = new Date(value).toISOString();
+    return formatDate;
+  }),
+});
+
+export type FormCreateType = z.infer<typeof formCreate>;
