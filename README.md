@@ -15,7 +15,7 @@
 - [x] Dashboard UI (board, card)
 - [x] NavBar UI in dashboard
 - [ ] NavBar -> button (filter, sort)
-- [ ] React-hook-form
+- [x] React-hook-form
 - [ ] forms for login, register and create task
 - [ ] API Board GET, PUT, POST
 GET: // get the tasks
