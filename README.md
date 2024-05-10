@@ -14,14 +14,7 @@
 
 ## To Do
 
-- [x] Dashboard UI (board, card)
-- [x] NavBar UI in dashboard
 - [ ] NavBar -> button (filter, sort)
-- [x] forms for login, register and create task
-- [ ] API Board GET, PUT, POST
-      GET: // get the tasks
-      PUT: //update column
-      POST: // create task
 
 ## Support
 
