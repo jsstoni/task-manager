@@ -15,6 +15,7 @@
 ## To Do
 
 - [ ] NavBar -> button (filter, sort)
+- [ ] Time-Tracking (Record task time), API
 
 ## Support
 
