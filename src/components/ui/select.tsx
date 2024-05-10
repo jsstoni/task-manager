@@ -3,7 +3,7 @@ import React from "react";
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   children?: React.ReactNode;
-  options: any[];
+  options?: any[];
 }
 
 const Select = React.forwardRef<HTMLSelectElement, Props>(
@@ -17,11 +17,16 @@ const Select = React.forwardRef<HTMLSelectElement, Props>(
         )}
         {...props}
       >
-        {options.map((option, index) => (
-          <option key={index} value={option} className="capitalize bg-zinc-900">
-            {option}
-          </option>
-        ))}
+        {options &&
+          options.map((option, index) => (
+            <option
+              key={index}
+              value={option}
+              className="capitalize bg-zinc-900"
+            >
+              {option}
+            </option>
+          ))}
         {children}
       </select>
     );
