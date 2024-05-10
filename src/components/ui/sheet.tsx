@@ -1,14 +1,22 @@
 import { cn } from "@/utils/libs/cn";
 import React from "react";
+import { Button } from "@/components";
 
 interface Props {
   children: React.ReactNode;
   hidden: boolean;
   position: "top" | "left" | "bottom" | "right";
   size?: "sm" | "md" | "xl";
+  close: () => void;
 }
 
-export function Sheet({ children, position, hidden, size = "md" }: Props) {
+export function Sheet({
+  children,
+  position,
+  hidden,
+  size = "md",
+  close,
+}: Props) {
   //variant size
   const vs = {
     sm: "max-w-sm",
@@ -37,6 +45,9 @@ export function Sheet({ children, position, hidden, size = "md" }: Props) {
           vs[size]
         )}
       >
+        <Button variant="ghost" onClick={close}>
+          x
+        </Button>
         {children}
       </div>
     </div>
