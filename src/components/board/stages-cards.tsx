@@ -1,13 +1,13 @@
 "use client";
 
 import { Tasks } from "@/utils/constant/tasks";
-import { useAppDispatch, useBoard, useDnD } from "@/utils/hooks";
+import { useAppDispatch, useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
 import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { BadgePriority } from "./badge-priority";
-import { setSingleTask } from "@/redux";
+import { BadgePriority } from "@/components";
+import { setOnlyTask } from "@/redux";
 
 interface Props {
   task: Tasks;
@@ -20,7 +20,7 @@ export function StagesCards({ task }: Props) {
   const duedate = dayjs().from(task.duedate, true);
 
   const handleClick = (task: Tasks) => {
-    dispatch(setSingleTask(task));
+    dispatch(setOnlyTask(task));
   };
 
   return (

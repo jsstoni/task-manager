@@ -3,7 +3,13 @@
 import { NavBar } from "../ui/nav-bar";
 import { closeTask, closeCreate, useGetTasksQuery } from "@/redux";
 import type { Columns } from "@/utils/constant/tasks";
-import { ColumnsCards, FormCreate, Modal, Sheet } from "@/components";
+import {
+  ColumnsCards,
+  FormCreate,
+  Modal,
+  Sheet,
+  SingleTask,
+} from "@/components";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
 
 interface Props {}
@@ -11,7 +17,7 @@ interface Props {}
 export function TaskBoard({}: Props) {
   const dispatch = useAppDispatch();
   const { isLoading } = useGetTasksQuery(null);
-  const { tasks, modalCreate, openTask, singleTask } = useBoard();
+  const { tasks, modalCreate, openTask, onlyTask } = useBoard();
 
   const closeSheet = () => {
     dispatch(closeTask());
@@ -44,8 +50,8 @@ export function TaskBoard({}: Props) {
         <FormCreate />
       </Modal>
 
-      <Sheet hidden={openTask} size="md" position="right" close={closeSheet}>
-        {singleTask && JSON.stringify(singleTask)}
+      <Sheet hidden={openTask} size="xl" position="right" close={closeSheet}>
+        {onlyTask && <SingleTask task={onlyTask} />}
       </Sheet>
     </>
   );

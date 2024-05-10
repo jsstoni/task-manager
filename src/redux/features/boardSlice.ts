@@ -8,7 +8,7 @@ interface State {
   idTask: number | null;
   whereMove: Columns | null;
   openTask: boolean;
-  singleTask: Tasks | null;
+  onlyTask: Tasks | null;
 }
 
 const initialState: State = {
@@ -17,7 +17,7 @@ const initialState: State = {
   idTask: null,
   whereMove: null,
   openTask: false,
-  singleTask: null
+  onlyTask: null
 }
 
 export const boardSlice = createSlice({
@@ -40,9 +40,9 @@ export const boardSlice = createSlice({
     setWhereMove: (state, action: PayloadAction<Columns>) => {
       state.whereMove = action.payload;
     },
-    setSingleTask: (state, action: PayloadAction<Tasks>) => {
+    setOnlyTask: (state, action: PayloadAction<Tasks>) => {
       state.openTask = true;
-      state.singleTask = action.payload;
+      state.onlyTask = action.payload;
     },
     closeTask: (state) => {
       state.openTask = false;
@@ -71,6 +71,6 @@ export const boardSlice = createSlice({
   }
 });
 
-export const { updateTasks, openCreate, closeCreate, setIdTask, setWhereMove, setSingleTask, closeTask, clean } = boardSlice.actions
+export const { updateTasks, openCreate, closeCreate, setIdTask, setWhereMove, setOnlyTask, closeTask, clean } = boardSlice.actions
 
 export default boardSlice.reducer;
