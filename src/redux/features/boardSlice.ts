@@ -28,8 +28,11 @@ export const boardSlice = createSlice({
       state.tasks = action.payload;
       boardSlice.caseReducers.clean(state);
     },
-    toggleCreate: (state) => {
-      state.modalCreate = !state.modalCreate;
+    openCreate: (state) => {
+      state.modalCreate = true;
+    },
+    closeCreate: (state) => {
+      state.modalCreate = false;
     },
     setIdTask: (state, action: PayloadAction<number>) => {
       state.idTask = action.payload;
@@ -68,6 +71,6 @@ export const boardSlice = createSlice({
   }
 });
 
-export const { updateTasks, toggleCreate, setIdTask, setWhereMove, setSingleTask, closeTask, clean } = boardSlice.actions
+export const { updateTasks, openCreate, closeCreate, setIdTask, setWhereMove, setSingleTask, closeTask, clean } = boardSlice.actions
 
 export default boardSlice.reducer;

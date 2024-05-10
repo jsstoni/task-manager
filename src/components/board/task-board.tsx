@@ -1,7 +1,7 @@
 "use client";
 
 import { NavBar } from "../ui/nav-bar";
-import { closeTask, toggleCreate, useGetTasksQuery } from "@/redux";
+import { closeTask, closeCreate, useGetTasksQuery } from "@/redux";
 import type { Columns } from "@/utils/constant/tasks";
 import { ColumnsCards, FormCreate, Modal, Sheet } from "@/components";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
@@ -39,7 +39,7 @@ export function TaskBoard({}: Props) {
       <Modal
         title="Create Task"
         isOpen={modalCreate}
-        close={() => dispatch(toggleCreate())}
+        close={() => dispatch(closeCreate())}
       >
         <FormCreate />
       </Modal>
