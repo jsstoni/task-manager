@@ -19,11 +19,7 @@ const Select = React.forwardRef<HTMLSelectElement, Props>(
       >
         {options &&
           options.map((option, index) => (
-            <option
-              key={index}
-              value={option}
-              className="capitalize bg-zinc-900"
-            >
+            <option key={index} value={option}>
               {option}
             </option>
           ))}

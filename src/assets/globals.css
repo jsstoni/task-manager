@@ -14,6 +14,10 @@
   a {
     @apply text-blue-500 hover:text-blue-800 hover:underline text-left;
   }
+
+  select option {
+    @apply dark:bg-zinc-900;
+  }
 }
 
 @layer utilities {
