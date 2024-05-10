@@ -1,21 +1,27 @@
 "use client";
 
 import { Tasks } from "@/utils/constant/tasks";
-import { useDnD } from "@/utils/hooks";
+import { useAppDispatch, useBoard, useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
 import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { BadgePriority } from "./badge-priority";
+import { setSingleTask } from "@/redux";
 
 interface Props {
   task: Tasks;
 }
 
 export function StagesCards({ task }: Props) {
+  const dispatch = useAppDispatch();
   const { onDragStart, onDragEnd, idTask } = useDnD();
   dayjs.extend(relativeTime);
   const duedate = dayjs().from(task.duedate, true);
+
+  const handleClick = (task: Tasks) => {
+    dispatch(setSingleTask(task));
+  };
 
   return (
     <article
@@ -26,6 +32,7 @@ export function StagesCards({ task }: Props) {
       draggable
       onDragStart={(ev) => onDragStart(ev, task.id)}
       onDragEnd={(ev) => onDragEnd(ev)}
+      onClick={() => handleClick(task)}
     >
       <p className="text-sm text-balance">{task.title}</p>
 
