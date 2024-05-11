@@ -1,5 +1,5 @@
-import type { Columns, Tasks } from "@/utils/constant/tasks"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { Columns, Tasks } from "@/utils/constant/tasks";
 
 export const boardService = createApi({
   reducerPath: "board_api",
@@ -16,10 +16,11 @@ export const boardService = createApi({
     }),
 
     //put tasks from api
-    setColumn: builder.mutation<Tasks, { id: number, column: Columns }>({
+    setColumn: builder.mutation<Tasks, { id: number; column: Columns }>({
       query: (updated) => ({ url: "/board", method: "PUT", body: updated }),
     }),
-  })
+  }),
 });
 
-export const { useGetTasksQuery, useCreateTaskMutation, useSetColumnMutation } = boardService;
+export const { useGetTasksQuery, useCreateTaskMutation, useSetColumnMutation } =
+  boardService;

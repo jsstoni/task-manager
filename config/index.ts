@@ -8,8 +8,10 @@ const env = z.object({
 
 env.parse(process.env);
 
-declare global {// eslint-disable-next-line no-unused-vars
-  namespace NodeJS {// eslint-disable-next-line no-unused-vars
-    interface ProcessEnv extends z.infer<typeof env> { }
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  namespace NodeJS {
+    // eslint-disable-next-line no-unused-vars
+    interface ProcessEnv extends z.infer<typeof env> {}
   }
 }

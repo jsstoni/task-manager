@@ -1,5 +1,11 @@
-import { clean, setIdTask, setWhereMove, updateTasks, useSetColumnMutation } from "@/redux";
-import { useAppDispatch, useBoard } from "@/utils/hooks"
+import {
+  clean,
+  setIdTask,
+  setWhereMove,
+  updateTasks,
+  useSetColumnMutation,
+} from "@/redux";
+import { useAppDispatch, useBoard } from "@/utils/hooks";
 import { Columns } from "../constant/tasks";
 
 export function useDnD() {
@@ -11,12 +17,12 @@ export function useDnD() {
   const onDragStart = (ev: React.DragEvent, id: number) => {
     dispatch(setIdTask(id));
     ev.dataTransfer.effectAllowed = "move";
-  }
+  };
 
   const onDragEnd = (ev: React.DragEvent) => {
     ev.preventDefault();
     dispatch(clean());
-  }
+  };
 
   const onDrop = (ev: React.DragEvent) => {
     ev.preventDefault();
@@ -38,12 +44,12 @@ export function useDnD() {
     if (idTask) {
       updateColumn({ id: idTask, column: whereMove });
     }
-  }
+  };
 
   const onDragOver = (ev: React.DragEvent, column: Columns) => {
     dispatch(setWhereMove(column));
     ev.preventDefault();
-  }
+  };
 
   return { onDragStart, onDragEnd, onDrop, onDragOver, idTask, whereMove };
 }

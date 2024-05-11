@@ -1,8 +1,8 @@
 "use server";
 
 import bcrypt from "bcrypt";
-import { prisma } from "@/utils/libs/prisma";
 import { FormRegisterType } from "@/utils/constant/forms";
+import { prisma } from "@/utils/libs/prisma";
 
 export async function signup(formData: FormRegisterType) {
   try {
@@ -10,13 +10,18 @@ export async function signup(formData: FormRegisterType) {
     const create = await prisma.users.create({
       data: {
         email: formData.email,
-        password: formData.password
-      }
+        password: formData.password,
+      },
     });
     const { password: _, ...user } = create;
     return user;
   } catch (error) {
-    let message = error instanceof Error ? process.env.NODE_ENV !== "production" ? error.message : "Register error" : "Unexpected Error";
+    const message =
+      error instanceof Error
+        ? process.env.NODE_ENV !== "production"
+          ? error.message
+          : "Register error"
+        : "Unexpected Error";
     return { error: message };
   }
 }

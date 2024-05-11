@@ -1,6 +1,6 @@
-import { cn } from "@/utils/libs/cn";
 import React from "react";
 import { Button } from "@/components";
+import { cn } from "@/utils/libs/cn";
 
 interface Props {
   children: React.ReactNode;
@@ -33,16 +33,16 @@ export function Sheet({
 
   return (
     <div
-      className={cn("bg-black/60 fixed inset-0 z-20 size-full", {
+      className={cn("fixed inset-0 z-20 size-full bg-black/60", {
         visible: hidden,
         invisible: !hidden,
       })}
     >
       <div
         className={cn(
-          "dark:bg-zinc-900 dark:border-zinc-800 p-5 shadow-2xl absolute w-full",
+          "absolute w-full p-5 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900",
           vp[position],
-          vs[size]
+          vs[size],
         )}
       >
         <Button variant="ghost" onClick={close}>

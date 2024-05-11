@@ -1,7 +1,7 @@
-import { NextAuthOptions, getServerSession } from "next-auth";
+import { compare } from "bcrypt";
+import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import { prisma } from "./prisma";
-import { compare } from "bcrypt";
 
 interface Credentials {
   email: string;
@@ -51,9 +51,8 @@ export const options: NextAuthOptions = {
         };
       },
     }),
-  ]
+  ],
 };
-
 
 export async function nextAuth() {
   const session = await getServerSession(options);

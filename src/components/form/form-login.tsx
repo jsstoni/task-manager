@@ -1,12 +1,12 @@
 "use client";
 
-import { FormLoginType, formLogin } from "@/utils/constant/forms";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, FormError, Input } from "@/components";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Button, FormError, Input } from "@/components";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { formLogin, FormLoginType } from "@/utils/constant/forms";
 
 export function FormLogin() {
   const {
@@ -31,7 +31,7 @@ export function FormLogin() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col">
       <label htmlFor="">Email</label>
       <Input type="text" {...register("email")} />
       <FormError value={errors.email} />

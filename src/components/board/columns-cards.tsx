@@ -1,10 +1,10 @@
 "use client";
 
-import { Columns, Tasks } from "@/utils/constant/tasks";
-import { cn } from "@/utils/libs/cn";
-import { StagesCards } from "./stages-cards";
 import { useMemo } from "react";
+import { StagesCards } from "@/components";
+import { Columns, Tasks } from "@/utils/constant/tasks";
 import { useDnD } from "@/utils/hooks";
+import { cn } from "@/utils/libs/cn";
 
 interface Props {
   column: Columns;
@@ -17,7 +17,7 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
   //tasks by columns
   const tasksByColumns = useMemo(
     () => tasks.filter((task) => task.column === column),
-    [tasks, column]
+    [tasks, column],
   );
   //column variant
   const cv = {
@@ -29,14 +29,14 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
 
   return (
     <section
-      className="columns-card flex-1 select-none flex flex-col gap-4 p-4"
+      className="columns-card flex flex-1 select-none flex-col gap-4 p-4"
       onDragOver={(ev) => onDragOver(ev, column)}
       onDrop={onDrop}
       onDragEnd={(ev) => onDragEnd(ev)}
     >
       <p className={cn("flex items-center", cv[column])}>
         {column}{" "}
-        <small className="bg-zinc-200 dark:bg-zinc-900 px-2 ml-3 rounded-md">
+        <small className="ml-3 rounded-md bg-zinc-200 px-2 dark:bg-zinc-900">
           {tasksByColumns.length}
         </small>
       </p>
@@ -44,7 +44,6 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
       {loading && <span>loading...</span>}
 
       {!loading &&
-        tasks &&
         tasksByColumns.map((task) => <StagesCards key={task.id} task={task} />)}
 
       {whereMove === column && <div className="h-0.5 bg-red-500"></div>}

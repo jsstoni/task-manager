@@ -13,5 +13,9 @@ export function BadgePriority({ value }: Props) {
     high: "bg-red-400",
   };
 
-  return <small className={cn("px-2 text-black rounded-md", pv[value])}>{value}</small>;
+  return (
+    <small className={cn("rounded-md px-2 text-black", pv[value])}>
+      {value}
+    </small>
+  );
 }

@@ -1,5 +1,5 @@
-import { cn } from "@/utils/libs/cn";
 import React from "react";
+import { cn } from "@/utils/libs/cn";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
@@ -19,14 +19,14 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
 
     return (
       <button
-        className={cn("p-1.5 rounded-md", cv[variant || "default"], className)}
+        className={cn("rounded-md p-1.5", cv[variant || "default"], className)}
         ref={ref}
         {...props}
       >
         {children}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

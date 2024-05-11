@@ -1,13 +1,13 @@
 "use client";
 
+import { BadgePriority } from "@/components";
+import { setOnlyTask } from "@/redux";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
 import { Tasks } from "@/utils/constant/tasks";
 import { useAppDispatch, useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
-import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { BadgePriority } from "@/components";
-import { setOnlyTask } from "@/redux";
 
 interface Props {
   task: Tasks;
@@ -27,14 +27,14 @@ export function StagesCards({ task }: Props) {
     <article
       className={cn(
         { "opacity-10": idTask === task.id },
-        "dark:bg-zinc-900 p-4 rounded-md flex flex-col gap-2 border dark:border-zinc-800 hover:dark:border-slate-800"
+        "flex flex-col gap-2 rounded-md border p-4 dark:border-zinc-800 dark:bg-zinc-900 hover:dark:border-slate-800",
       )}
       draggable
       onDragStart={(ev) => onDragStart(ev, task.id)}
       onDragEnd={(ev) => onDragEnd(ev)}
       onClick={() => handleClick(task)}
     >
-      <p className="text-sm text-balance">{task.title}</p>
+      <p className="text-balance text-sm">{task.title}</p>
 
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2 text-xs text-zinc-600">

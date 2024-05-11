@@ -1,11 +1,11 @@
 "use client";
 
-import { FormRegisterType, formRegister } from "@/utils/constant/forms";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, FormError, Input } from "@/components";
 import Link from "next/link";
+import { Button, FormError, Input } from "@/components";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { signup } from "@/app/auth/signup/actions";
+import { formRegister, FormRegisterType } from "@/utils/constant/forms";
 
 export function FormRegister() {
   const {
@@ -22,7 +22,7 @@ export function FormRegister() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col">
       <label htmlFor="">Email</label>
       <Input type="text" {...register("email")} />
       <FormError value={errors.email} />

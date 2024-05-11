@@ -1,6 +1,6 @@
-import { Tasks } from "@/utils/constant/tasks";
-import { BadgePriority } from "./badge-priority";
+import { BadgePriority } from "@/components";
 import dayjs from "dayjs";
+import { Tasks } from "@/utils/constant/tasks";
 
 interface Props {
   task: Tasks;
@@ -10,7 +10,7 @@ export function SingleTask({ task }: Props) {
   const created = dayjs(task.createdAt).format("MMM D, YYYY");
   return (
     <>
-      <h1 className="text-2xl mb-4">{task.title}</h1>
+      <h1 className="mb-4 text-2xl">{task.title}</h1>
 
       <div className="grid grid-cols-12 gap-3">
         <p className="col-span-3 dark:text-zinc-600">Priority</p>
@@ -28,7 +28,7 @@ export function SingleTask({ task }: Props) {
         <p className="col-span-9">{duedate}</p>
       </div>
 
-      <div className="bg-zinc-950 rounded-xl p-3 mt-4">{task.content}</div>
+      <div className="mt-4 rounded-xl bg-zinc-950 p-3">{task.content}</div>
     </>
   );
 }

@@ -8,11 +8,11 @@
   }
 
   label {
-    @apply block mt-2.5;
+    @apply mt-2.5 block;
   }
 
   a {
-    @apply text-blue-500 hover:text-blue-800 hover:underline text-left;
+    @apply text-left text-blue-500 hover:text-blue-800 hover:underline;
   }
 
   select option {
@@ -30,6 +30,6 @@
   }
 
   .aside a svg {
-    @apply w-[20px] h-[20px];
+    @apply h-[20px] w-[20px];
   }
 }

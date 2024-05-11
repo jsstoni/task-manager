@@ -1,5 +1,5 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Columns, Tasks } from "@/utils/constant/tasks";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { boardService } from "../services";
 
 interface State {
@@ -17,8 +17,8 @@ const initialState: State = {
   idTask: null,
   whereMove: null,
   openTask: false,
-  onlyTask: null
-}
+  onlyTask: null,
+};
 
 export const boardSlice = createSlice({
   name: "board",
@@ -50,15 +50,15 @@ export const boardSlice = createSlice({
     clean: (state) => {
       state.idTask = null;
       state.whereMove = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     // You will get the tasks when you complete the API call
     builder.addMatcher(
       boardService.endpoints.getTasks.matchFulfilled,
       (state, { payload }) => {
-        state.tasks = payload
-      }
+        state.tasks = payload;
+      },
     );
 
     // get the task created after completing
@@ -68,9 +68,18 @@ export const boardSlice = createSlice({
         state.tasks.push(payload);
       },
     );
-  }
+  },
 });
 
-export const { updateTasks, openCreate, closeCreate, setIdTask, setWhereMove, setOnlyTask, closeTask, clean } = boardSlice.actions
+export const {
+  updateTasks,
+  openCreate,
+  closeCreate,
+  setIdTask,
+  setWhereMove,
+  setOnlyTask,
+  closeTask,
+  clean,
+} = boardSlice.actions;
 
 export default boardSlice.reducer;

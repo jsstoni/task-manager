@@ -1,5 +1,5 @@
-import { cn } from "@/utils/libs/cn";
 import React from "react";
+import { cn } from "@/utils/libs/cn";
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   children?: React.ReactNode;
@@ -12,8 +12,8 @@ const Select = React.forwardRef<HTMLSelectElement, Props>(
       <select
         ref={ref}
         className={cn(
-          "w-full px-3 py-2 outline-none rounded-md bg-zinc-800/30 border border-zinc-800",
-          className
+          "w-full rounded-md border border-zinc-800 bg-zinc-800/30 px-3 py-2 outline-none",
+          className,
         )}
         {...props}
       >
@@ -26,7 +26,7 @@ const Select = React.forwardRef<HTMLSelectElement, Props>(
         {children}
       </select>
     );
-  }
+  },
 );
 
 Select.displayName = "Button";

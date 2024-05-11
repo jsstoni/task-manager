@@ -1,5 +1,5 @@
 import { useAppSelector } from "./use-redux";
 
 export function useBoard() {
-  return useAppSelector(state => state.boardSlice);
+  return useAppSelector((state) => state.boardSlice);
 }

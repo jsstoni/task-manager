@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "@/utils/libs/cn";
 import { useEffect } from "react";
 import { BsX } from "react-icons/bs";
+import { cn } from "@/utils/libs/cn";
 
 type SizeType = "xs" | "md" | "lg" | "xl" | "default";
 
@@ -40,7 +40,7 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
       className={cn(
         { "visible bg-black/50": isOpen },
         { invisible: !isOpen },
-        "transition-colors fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center"
+        "fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center transition-colors",
       )}
     >
       <div
@@ -48,8 +48,8 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
         className={cn(
           { "scale-100 opacity-100": isOpen },
           { "scale-125 opacity-0": !isOpen },
-          "transition-all mt-5 max-h-[90%] w-full overflow-auto rounded-md bg-white p-5 scrollbar-thin dark:bg-zinc-900",
-          windowSize[size || "default"]
+          "scrollbar-thin mt-5 max-h-[90%] w-full overflow-auto rounded-md bg-white p-5 transition-all dark:bg-zinc-900",
+          windowSize[size || "default"],
         )}
       >
         <div className="mb-3 flex items-center border-b border-gray-200 pb-2 dark:border-zinc-800">

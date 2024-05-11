@@ -1,9 +1,9 @@
 "use client";
 
-import { useBoard } from "@/utils/hooks";
 import { useEffect, useMemo, useState } from "react";
-import { BsPauseFill, BsPlayFill, BsStopFill } from "react-icons/bs";
 import { Select } from "@/components";
+import { BsPauseFill, BsPlayFill, BsStopFill } from "react-icons/bs";
+import { useBoard } from "@/utils/hooks";
 
 export function TimeTracking() {
   const [counter, setCounter] = useState<number>(0);
@@ -14,7 +14,7 @@ export function TimeTracking() {
 
   const inProgress = useMemo(
     () => tasks.filter((task) => task.column === "In Progress"),
-    [tasks]
+    [tasks],
   );
 
   useEffect(() => {

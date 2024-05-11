@@ -1,8 +1,5 @@
 "use client";
 
-import { FormCreateType, formCreate } from "@/utils/constant/forms";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Button,
   FormError,
@@ -12,6 +9,9 @@ import {
   Textarea,
 } from "@/components";
 import { closeCreate, useCreateTaskMutation } from "@/redux";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { formCreate, FormCreateType } from "@/utils/constant/forms";
 import { Tasks } from "@/utils/constant/tasks";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
 
@@ -26,7 +26,7 @@ export function FormCreate() {
   const dispatch = useAppDispatch();
   const { modalCreate } = useBoard();
 
-  const [submitTask, { isLoading }] = useCreateTaskMutation();
+  const [submitTask] = useCreateTaskMutation();
 
   const onSubmit: SubmitHandler<FormCreateType> = async (data) => {
     try {
@@ -44,7 +44,7 @@ export function FormCreate() {
 
   return (
     <Modal title="Create Task" isOpen={modalCreate} close={handleClose}>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col">
         <label htmlFor="">Title</label>
         <Input type="text" {...register("title")} />
         <FormError value={errors.title} />

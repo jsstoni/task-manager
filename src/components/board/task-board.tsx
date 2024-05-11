@@ -1,19 +1,17 @@
 "use client";
 
-import { closeTask, useGetTasksQuery } from "@/redux";
-import type { Columns } from "@/utils/constant/tasks";
 import {
   ColumnsCards,
   FormCreate,
+  NavBar,
   Sheet,
   SingleTask,
-  NavBar,
 } from "@/components";
+import { closeTask, useGetTasksQuery } from "@/redux";
+import type { Columns } from "@/utils/constant/tasks";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
 
-interface Props {}
-
-export function TaskBoard({}: Props) {
+export function TaskBoard() {
   const dispatch = useAppDispatch();
   const { isLoading } = useGetTasksQuery(null);
   const { tasks, openTask, onlyTask } = useBoard();
@@ -26,10 +24,10 @@ export function TaskBoard({}: Props) {
 
   return (
     <>
-      <div className="flex flex-col justify-between h-screen">
+      <div className="flex h-screen flex-col justify-between">
         <NavBar />
 
-        <section className="flex justify-between flex-grow px-5">
+        <section className="flex flex-grow justify-between px-5">
           {columns.map((column, index) => (
             <ColumnsCards
               key={index}
