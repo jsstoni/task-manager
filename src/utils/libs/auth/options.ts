@@ -1,7 +1,7 @@
 import { compare } from "bcrypt";
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
-import { prisma } from "./prisma";
+import { prisma } from "../prisma";
 
 interface Credentials {
   email: string;
@@ -54,12 +54,12 @@ export const options: NextAuthOptions = {
   ],
 };
 
-export async function nextAuth() {
+export async function getSession() {
   const session = await getServerSession(options);
 
   if (!session || !session.hasOwnProperty("user") || !session.user) {
     throw new Error("session does not exist");
   }
 
-  return { userId: session.user.user_id };
+  return session;
 }

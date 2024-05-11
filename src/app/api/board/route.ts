@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import { formCreate } from "@/utils/constant/forms";
-import { nextAuth } from "@/utils/libs/next-auth";
 import { prisma } from "@/utils/libs/prisma";
+import { withSession } from "@/utils/libs/auth/session";
 
-export async function GET() {
+export const GET = withSession(async ({ session }) => {
   try {
-    const session = await nextAuth();
-
     const tasks = await prisma.tasks.findMany({
       where: {
         user_id: session.userId,
@@ -26,11 +24,10 @@ export async function GET() {
         : "Unexpected Error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
-}
+});
 
-export async function POST(request: Request) {
+export const POST = withSession(async ({ request, session }) => {
   try {
-    const session = await nextAuth();
     const body = await request.json();
     body.user_id = session.userId;
 
@@ -56,11 +53,10 @@ export async function POST(request: Request) {
         : "Unexpected Error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
-}
+});
 
-export async function PUT(request: Request) {
+export const PUT = withSession(async ({ request, session }) => {
   try {
-    const session = await nextAuth();
     const body = await request.json();
 
     const updateTask = await prisma.tasks.update({
@@ -78,4 +74,4 @@ export async function PUT(request: Request) {
         : "Unexpected Error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
-}
+});
