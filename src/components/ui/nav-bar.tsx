@@ -8,7 +8,7 @@ export function NavBar() {
   const dispatch = useAppDispatch();
 
   return (
-    <section className="flex items-center py-2.5 gap-4 px-4 border-b dark:border-zinc-800">
+    <section className="flex items-center py-2.5 gap-4 px-9 border-b dark:border-zinc-800">
       <h1 className="text-xl">Tasks</h1>
 
       <div className="ml-auto flex items-center gap-3">

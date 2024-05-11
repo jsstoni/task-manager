@@ -30,6 +30,6 @@
   }
 
   .aside a svg {
-    @apply w-[22px] h-[22px];
+    @apply w-[20px] h-[20px];
   }
 }

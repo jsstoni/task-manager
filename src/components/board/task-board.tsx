@@ -30,7 +30,7 @@ export function TaskBoard({}: Props) {
       <div className="flex flex-col justify-between h-screen">
         <NavBar />
 
-        <section className="flex justify-between flex-grow">
+        <section className="flex justify-between flex-grow px-5">
           {columns.map((column, index) => (
             <ColumnsCards
               key={index}
