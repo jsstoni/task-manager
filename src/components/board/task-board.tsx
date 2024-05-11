@@ -1,14 +1,13 @@
 "use client";
 
-import { NavBar } from "../ui/nav-bar";
-import { closeTask, closeCreate, useGetTasksQuery } from "@/redux";
+import { closeTask, useGetTasksQuery } from "@/redux";
 import type { Columns } from "@/utils/constant/tasks";
 import {
   ColumnsCards,
   FormCreate,
-  Modal,
   Sheet,
   SingleTask,
+  NavBar,
 } from "@/components";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
 
@@ -17,7 +16,7 @@ interface Props {}
 export function TaskBoard({}: Props) {
   const dispatch = useAppDispatch();
   const { isLoading } = useGetTasksQuery(null);
-  const { tasks, modalCreate, openTask, onlyTask } = useBoard();
+  const { tasks, openTask, onlyTask } = useBoard();
 
   const closeSheet = () => {
     dispatch(closeTask());
@@ -42,13 +41,7 @@ export function TaskBoard({}: Props) {
         </section>
       </div>
 
-      <Modal
-        title="Create Task"
-        isOpen={modalCreate}
-        close={() => dispatch(closeCreate())}
-      >
-        <FormCreate />
-      </Modal>
+      <FormCreate />
 
       <Sheet hidden={openTask} size="xl" position="right" close={closeSheet}>
         {onlyTask && <SingleTask task={onlyTask} />}
