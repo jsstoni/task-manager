@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { FormRegisterType } from "@/utils/constant/forms";
 import { prisma } from "@/utils/libs/prisma";
 
-export async function signup(formData: FormRegisterType) {
+export default async function signup(formData: FormRegisterType) {
   try {
     formData.password = await bcrypt.hash(formData.password, 10);
     const create = await prisma.users.create({

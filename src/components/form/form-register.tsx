@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button, FormError, Input } from "@/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { signup } from "@/app/auth/signup/actions";
+import signup from "@/utils/actions/signup";
 import { formRegister, FormRegisterType } from "@/utils/constant/forms";
 
 export function FormRegister() {
