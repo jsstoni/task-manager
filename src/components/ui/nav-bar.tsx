@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, TimeTracking } from "@/components";
-import { openCreate } from "@/redux";
+import { openCreate } from "@/utils/libs/redux";
 import { useAppDispatch } from "@/utils/hooks";
 
 export function NavBar() {

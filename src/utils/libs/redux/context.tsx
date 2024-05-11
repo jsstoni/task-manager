@@ -1,6 +1,6 @@
 "use client";
 
-import { store } from "@/redux";
+import { store } from "@/utils/libs/redux";
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
 

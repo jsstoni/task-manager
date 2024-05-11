@@ -1,7 +1,7 @@
 "use client";
 
 import { BadgePriority } from "@/components";
-import { setOnlyTask } from "@/redux";
+import { setOnlyTask } from "@/utils/libs/redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";

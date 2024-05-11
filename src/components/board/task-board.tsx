@@ -7,7 +7,7 @@ import {
   Sheet,
   SingleTask,
 } from "@/components";
-import { closeTask, useGetTasksQuery } from "@/redux";
+import { closeTask, useGetTasksQuery } from "@/utils/libs/redux";
 import type { Columns } from "@/utils/constant/tasks";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
 

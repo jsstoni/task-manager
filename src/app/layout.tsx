@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Providers } from "@/redux";
+import { Providers } from "@/utils/libs/redux";
 import { ThemeProvider } from "next-themes";
 
 import "@/utils/env";

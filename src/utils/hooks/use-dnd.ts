@@ -4,7 +4,7 @@ import {
   setWhereMove,
   updateTasks,
   useSetColumnMutation,
-} from "@/redux";
+} from "@/utils/libs/redux";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
 import { Columns } from "../constant/tasks";
 

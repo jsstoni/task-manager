@@ -8,7 +8,7 @@ import {
   Select,
   Textarea,
 } from "@/components";
-import { closeCreate, useCreateTaskMutation } from "@/redux";
+import { closeCreate, useCreateTaskMutation } from "@/utils/libs/redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { formCreate, FormCreateType } from "@/utils/constant/forms";
