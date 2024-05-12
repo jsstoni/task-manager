@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components";
 import { cn } from "@/utils/libs/cn";
+import { BsXLg } from "react-icons/bs";
 
 interface Props {
   children: React.ReactNode;
@@ -33,8 +34,8 @@ export function Sheet({
 
   return (
     <div
-      className={cn("fixed inset-0 z-20 size-full bg-black/60", {
-        visible: hidden,
+      className={cn("fixed inset-0 z-20 size-full transition-colors", {
+        "visible bg-black/70": hidden,
         invisible: !hidden,
       })}
     >
@@ -46,7 +47,7 @@ export function Sheet({
         )}
       >
         <Button variant="ghost" onClick={close}>
-          x
+          <BsXLg />
         </Button>
         {children}
       </div>

@@ -38,9 +38,9 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
   return (
     <div
       className={cn(
-        { "visible bg-black/50": isOpen },
+        { "visible bg-black/70": isOpen },
         { invisible: !isOpen },
-        "fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center transition-colors",
+        "fixed inset-0 z-50 flex size-full flex-col items-center transition-colors",
       )}
     >
       <div
@@ -48,7 +48,7 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
         className={cn(
           { "scale-100 opacity-100": isOpen },
           { "scale-125 opacity-0": !isOpen },
-          "scrollbar-thin mt-5 max-h-[90%] w-full overflow-auto rounded-md bg-white p-5 transition-all dark:bg-zinc-900",
+          "mt-5 max-h-[90%] w-full overflow-auto rounded-md bg-white p-5 transition-all dark:bg-zinc-900",
           windowSize[size || "default"],
         )}
       >
