@@ -13,7 +13,7 @@ interface Props {
   task: Tasks;
 }
 
-export function StagesCards({ task }: Props) {
+export function ItemsCards({ task }: Props) {
   const dispatch = useAppDispatch();
   const { onDragStart, onDragEnd, idTask } = useDnD();
   dayjs.extend(relativeTime);
