@@ -1,6 +1,6 @@
 interface Props {
-  value: string;
+  value: string | null;
 }
 export function DisplayError({ value }: Props) {
-  return <span className="p-0.5 text-red-500">{value}</span>;
+  return value && <span className="p-0.5 text-red-500">{value}</span>
 }
