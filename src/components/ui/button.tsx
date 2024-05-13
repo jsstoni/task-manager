@@ -1,13 +1,15 @@
 import React from "react";
 import { cn } from "@/utils/libs/cn";
+import { BsArrowClockwise } from "react-icons/bs";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   variant?: "default" | "secondary" | "outline" | "link" | "ghost";
+  loader?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, Props>(
-  ({ variant, className, children, ...props }, ref) => {
+  ({ variant, loader, className, children, ...props }, ref) => {
     //class variant
     const cv = {
       default: "bg-black text-white dark:bg-white dark:text-black",
@@ -19,11 +21,15 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
 
     return (
       <button
-        className={cn("rounded-md p-1.5", cv[variant || "default"], className)}
+        className={cn(
+          "flex items-center rounded-md p-1.5 px-4",
+          cv[variant || "default"],
+          className,
+        )}
         ref={ref}
         {...props}
       >
-        {children}
+        {loader && <BsArrowClockwise className="animate-spin" />} {children}
       </button>
     );
   },
