@@ -7,12 +7,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { formLogin, FormLoginType } from "@/utils/constant/forms";
+import { useState } from "react";
+import { DisplayError } from "../ui/display-error";
 
 export function FormLogin() {
+  const [error, setError] = useState<string>("");
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormLoginType>({ resolver: zodResolver(formLogin) });
 
   const router = useRouter();
@@ -24,7 +27,7 @@ export function FormLogin() {
       redirect: false,
     });
     if (res && res.error) {
-      alert(res.error);
+      setError(res.error);
     } else {
       router.push("/");
     }
@@ -40,7 +43,14 @@ export function FormLogin() {
       <Input type="password" {...register("password")} />
       <FormError value={errors.password} />
 
-      <Button type="submit" className="mt-3">
+      {error && !isSubmitting && <DisplayError value={error} />}
+
+      <Button
+        type="submit"
+        className="mt-3"
+        disabled={isSubmitting}
+        loader={isSubmitting}
+      >
         Login
       </Button>
 
