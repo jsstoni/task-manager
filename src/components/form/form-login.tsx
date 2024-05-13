@@ -21,6 +21,7 @@ export function FormLogin() {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormLoginType> = async (data) => {
+    setError("");
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,

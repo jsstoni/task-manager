@@ -18,6 +18,7 @@ export function FormRegister() {
   } = useForm<FormRegisterType>({ resolver: zodResolver(formRegister) });
 
   const onSubmit: SubmitHandler<FormRegisterType> = async (data) => {
+    setError("");
     const user = await signup(data);
     if ("error" in user) {
       setError(user.error);
