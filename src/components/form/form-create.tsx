@@ -2,6 +2,7 @@
 
 import {
   Button,
+  DisplayError,
   FormError,
   Input,
   Modal,
@@ -14,6 +15,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { formCreate, FormCreateType } from "@/utils/constant/forms";
 import { Tasks } from "@/utils/constant/tasks";
 import { useAppDispatch, useBoard } from "@/utils/hooks";
+import { handleError } from "@/utils/handle-error";
 
 export function FormCreate() {
   const {
@@ -26,15 +28,11 @@ export function FormCreate() {
   const dispatch = useAppDispatch();
   const { modalCreate } = useBoard();
 
-  const [submitTask] = useCreateTaskMutation();
+  const [submitTask, { isError, error }] = useCreateTaskMutation();
 
   const onSubmit: SubmitHandler<FormCreateType> = async (data) => {
-    try {
-      const task: Partial<Tasks> = { column: "Backlog", log: 0, ...data };
-      await submitTask(task).unwrap();
-    } catch (error) {
-      console.log(error);
-    }
+    const task: Partial<Tasks> = { column: "Backlog", log: 0, ...data };
+    await submitTask(task).unwrap();
   };
 
   const handleClose = () => {
@@ -60,6 +58,8 @@ export function FormCreate() {
         <label htmlFor="">Due Date</label>
         <Input type="date" {...register("duedate")} />
         <FormError value={errors.duedate} />
+
+        {isError && <DisplayError value={handleError(error)} />}
 
         <Button type="submit" className="mt-3">
           Create
