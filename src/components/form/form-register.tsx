@@ -6,18 +6,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import signup from "@/utils/actions/signup";
 import { formRegister, FormRegisterType } from "@/utils/constant/forms";
+import { useState } from "react";
+import { DisplayError } from "../ui/display-error";
 
 export function FormRegister() {
+  const [error, setError] = useState<string>("");
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormRegisterType>({ resolver: zodResolver(formRegister) });
 
   const onSubmit: SubmitHandler<FormRegisterType> = async (data) => {
     const user = await signup(data);
     if ("error" in user) {
-      console.log(user.error);
+      setError(user.error);
     }
   };
 
@@ -35,7 +38,9 @@ export function FormRegister() {
       <Input type="password" {...register("repassword")} />
       <FormError value={errors.repassword} />
 
-      <Button type="submit" className="mt-3">
+      {error && !isSubmitting && <DisplayError value={error} />}
+
+      <Button type="submit" className="mt-3" loader={isSubmitting}>
         Register
       </Button>
 
