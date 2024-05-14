@@ -3,7 +3,7 @@ import { cn } from "@/utils/libs/cn";
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   children?: React.ReactNode;
-  options?: any[];
+  options?: (string | number)[];
 }
 
 const Select = React.forwardRef<HTMLSelectElement, Props>(
