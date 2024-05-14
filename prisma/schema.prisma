@@ -32,8 +32,21 @@ model Tasks {
   duedate   DateTime?
   usersId   Users     @relation(fields: [user_id], references: [id])
   user_id   Int
+  subtask   Subtask[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 
   @@map("tasks")
+}
+
+model Subtask {
+  id        Int      @id @default(autoincrement())
+  title     String
+  check     Boolean  @default(false)
+  Tasks     Tasks    @relation(fields: [tasks_id], references: [id])
+  tasks_id  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("subtask")
 }

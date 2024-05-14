@@ -14,3 +14,11 @@ export interface Tasks {
   createdAt: string;
   updatedAt: string;
 }
+
+
+export interface Subtask {
+  id: number;
+  title: string;
+  check: boolean;
+  tasks_id: number;
+}
