@@ -8,12 +8,7 @@ interface Props {
   size?: "sm" | "md" | "xl";
 }
 
-export function Sheet({
-  children,
-  position,
-  hidden,
-  size = "md",
-}: Props) {
+export function Sheet({ children, position, hidden, size = "md" }: Props) {
   //variant size
   const vs = {
     sm: "max-w-sm",

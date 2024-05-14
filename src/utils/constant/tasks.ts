@@ -15,7 +15,6 @@ export interface Tasks {
   updatedAt: string;
 }
 
-
 export interface Subtask {
   id: number;
   title: string;

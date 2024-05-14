@@ -21,12 +21,9 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
 
     return (
       <button
-        className={cn(
-          "rounded-md p-1.5",
-          cv[variant || "default"],
-          className,
-          { "flex items-center justify-center gap-1 px-4": loader }
-        )}
+        className={cn("rounded-md p-1.5", cv[variant || "default"], className, {
+          "flex items-center justify-center gap-1 px-4": loader,
+        })}
         ref={ref}
         {...props}
       >

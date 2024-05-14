@@ -1,8 +1,8 @@
 type ResError = {
   data: {
-    error: string
-  }
-}
+    error: string;
+  };
+};
 
 export function handleError(error: unknown): null | string {
   if (!error) {
