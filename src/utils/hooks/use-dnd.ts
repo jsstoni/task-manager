@@ -10,7 +10,7 @@ import { Columns } from "../constant/tasks";
 
 export function useDnD() {
   const dispatch = useAppDispatch();
-  const { idTask, whereMove, tasks } = useBoard();
+  const { idTask, whereMove, tasks, isDrag } = useBoard();
 
   const [updateColumn] = useSetColumnMutation();
 
@@ -29,7 +29,7 @@ export function useDnD() {
     const taskIndex = tasks.findIndex((task) => task.id === idTask);
     let selectedTask = { ...tasks[taskIndex] };
 
-    if (!whereMove || selectedTask.column === whereMove) {
+    if (!isDrag || !whereMove || selectedTask.column === whereMove) {
       return;
     }
 
@@ -47,8 +47,10 @@ export function useDnD() {
   };
 
   const onDragOver = (ev: React.DragEvent, column: Columns) => {
-    dispatch(setWhereMove(column));
     ev.preventDefault();
+    if (isDrag) {
+      dispatch(setWhereMove(column));
+    }
   };
 
   return { onDragStart, onDragEnd, onDrop, onDragOver, idTask, whereMove };

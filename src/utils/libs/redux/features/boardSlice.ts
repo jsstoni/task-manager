@@ -4,6 +4,7 @@ import { boardService } from "../services";
 
 interface State {
   tasks: Tasks[];
+  isDrag: boolean;
   modalCreate: boolean;
   idTask: number | null;
   whereMove: Columns | null;
@@ -13,6 +14,7 @@ interface State {
 
 const initialState: State = {
   tasks: [],
+  isDrag: false,
   modalCreate: false,
   idTask: null,
   whereMove: null,
@@ -35,6 +37,7 @@ export const boardSlice = createSlice({
       state.modalCreate = false;
     },
     setIdTask: (state, action: PayloadAction<number>) => {
+      state.isDrag = true;
       state.idTask = action.payload;
     },
     setWhereMove: (state, action: PayloadAction<Columns>) => {
@@ -50,6 +53,7 @@ export const boardSlice = createSlice({
     clean: (state) => {
       state.idTask = null;
       state.whereMove = null;
+      state.isDrag = false;
     },
   },
   extraReducers: (builder) => {
