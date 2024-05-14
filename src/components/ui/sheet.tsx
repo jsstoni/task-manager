@@ -1,14 +1,11 @@
 import React from "react";
-import { Button } from "@/components";
 import { cn } from "@/utils/libs/cn";
-import { BsXLg } from "react-icons/bs";
 
 interface Props {
   children: React.ReactNode;
   hidden: boolean;
   position: "top" | "left" | "bottom" | "right";
   size?: "sm" | "md" | "xl";
-  close: () => void;
 }
 
 export function Sheet({
@@ -16,7 +13,6 @@ export function Sheet({
   position,
   hidden,
   size = "md",
-  close,
 }: Props) {
   //variant size
   const vs = {
@@ -46,9 +42,6 @@ export function Sheet({
           vs[size],
         )}
       >
-        <Button variant="ghost" onClick={close}>
-          <BsXLg />
-        </Button>
         {children}
       </div>
     </div>
