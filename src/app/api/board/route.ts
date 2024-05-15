@@ -9,6 +9,9 @@ export const GET = withSession(async ({ session }) => {
       where: {
         user_id: session.userId,
       },
+      include: {
+        subtask: true,
+      },
       orderBy: {
         updatedAt: "asc",
       },

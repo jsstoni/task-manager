@@ -47,9 +47,9 @@ export function ItemsCards({ task }: Props) {
 
         <small>Log: {task.log}</small>
 
-        <small className="ml-auto flex items-center gap-1">
+        {task.subtask.length > 0 && <small className="ml-auto flex items-center gap-1">
           <BsCheck2Square /> 0/1
-        </small>
+        </small>}
       </div>
     </article>
   );

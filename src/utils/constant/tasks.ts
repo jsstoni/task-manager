@@ -11,6 +11,7 @@ export interface Tasks {
   duedate?: string;
   user_id: number;
   column: Columns;
+  subtask: Subtask[];
   createdAt: string;
   updatedAt: string;
 }
@@ -20,4 +21,6 @@ export interface Subtask {
   title: string;
   check: boolean;
   tasks_id: number;
+  createdAt: string;
+  updatedAt: string;
 }
