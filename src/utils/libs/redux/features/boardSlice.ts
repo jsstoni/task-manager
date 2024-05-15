@@ -72,6 +72,21 @@ export const boardSlice = createSlice({
         state.tasks.push(payload);
       },
     );
+
+    builder.addMatcher(
+      boardService.endpoints.addSubtask.matchFulfilled,
+      (state, { payload }) => {
+        if (state.onlyTask) {
+          const id = state.onlyTask.id;
+          const index = state.tasks.findIndex((task) => task.id === id);
+          state.tasks[index].subtask = [...state.tasks[index].subtask, ...payload];
+          state.onlyTask.subtask = [
+            ...state.onlyTask.subtask,
+            ...payload,
+          ];
+        }
+      },
+    );
   },
 });
 
