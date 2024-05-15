@@ -29,7 +29,7 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
 
   return (
     <section
-      className="columns-card relative flex flex-1 select-none flex-col gap-4 p-4"
+      className="columns-card relative flex flex-1 select-none flex-col gap-4 overflow-auto p-4"
       onDragOver={(ev) => onDragOver(ev, column)}
       onDrop={onDrop}
       onDragEnd={(ev) => onDragEnd(ev)}

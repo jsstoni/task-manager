@@ -32,7 +32,7 @@ export function Sheet({ children, position, hidden, size = "md" }: Props) {
     >
       <div
         className={cn(
-          "absolute w-full p-5 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900",
+          "absolute w-full overflow-auto p-5 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900",
           vp[position],
           vs[size],
         )}
