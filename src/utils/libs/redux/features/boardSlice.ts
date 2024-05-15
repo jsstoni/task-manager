@@ -79,11 +79,11 @@ export const boardSlice = createSlice({
         if (state.onlyTask) {
           const id = state.onlyTask.id;
           const index = state.tasks.findIndex((task) => task.id === id);
-          state.tasks[index].subtask = [...state.tasks[index].subtask, ...payload];
-          state.onlyTask.subtask = [
-            ...state.onlyTask.subtask,
+          state.tasks[index].subtask = [
+            ...state.tasks[index].subtask,
             ...payload,
           ];
+          state.onlyTask.subtask = [...state.onlyTask.subtask, ...payload];
         }
       },
     );

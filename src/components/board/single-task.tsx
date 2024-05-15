@@ -1,6 +1,12 @@
 "use client";
 
-import { BadgePriority, Button, CheckList, Input, TodoList } from "@/components";
+import {
+  BadgePriority,
+  Button,
+  CheckList,
+  Input,
+  TodoList,
+} from "@/components";
 import dayjs from "dayjs";
 import { Subtask, Tasks } from "@/utils/constant/tasks";
 import { useState } from "react";
@@ -104,12 +110,10 @@ export function SingleTask({ task }: Props) {
       </div>
 
       <div className="flex flex-col gap-2">
-
-        {task && task.subtask && task.subtask.length > 0 &&
-          task.subtask.map((todo) => (
-            <TodoList key={todo.id} todo={todo} />
-          ))
-        }
+        {task &&
+          task.subtask &&
+          task.subtask.length > 0 &&
+          task.subtask.map((todo) => <TodoList key={todo.id} todo={todo} />)}
 
         {subtask &&
           subtask.map((todo, index) => (
