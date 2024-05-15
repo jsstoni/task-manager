@@ -1,12 +1,12 @@
 "use client";
 
-import { BadgePriority, Button, CheckList, Input } from "@/components";
+import { BadgePriority, Button, CheckList, Input, TodoList } from "@/components";
 import dayjs from "dayjs";
 import { Subtask, Tasks } from "@/utils/constant/tasks";
 import { useState } from "react";
 import { BsPlusLg, BsTrash, BsXLg } from "react-icons/bs";
 import { useAppDispatch } from "@/utils/hooks";
-import { closeTask } from "@/utils/libs/redux";
+import { closeTask, useAddSubtaskMutation } from "@/utils/libs/redux";
 
 interface Props {
   task: Tasks;
@@ -14,6 +14,7 @@ interface Props {
 export function SingleTask({ task }: Props) {
   const dispatch = useAppDispatch();
   const [subtask, setSubtask] = useState<Subtask[]>([]);
+  const [submitSubtask, { isLoading }] = useAddSubtaskMutation();
 
   const addSubtask = () => {
     const subTask = {
@@ -40,6 +41,17 @@ export function SingleTask({ task }: Props) {
       [key]: value,
     };
     setSubtask(updatedList);
+  }
+
+  async function handleSave() {
+    const todos = [...subtask];
+    const validateTitle = todos.every((todo) => todo.title.trim() !== "");
+    if (!validateTitle) {
+      alert("faltan titulos por completar");
+      return;
+    }
+    await submitSubtask(subtask);
+    setSubtask([]);
   }
 
   const handleClose = () => {
@@ -84,10 +96,21 @@ export function SingleTask({ task }: Props) {
           {" "}
           <BsPlusLg /> Add Subtask
         </Button>
-        {subtask.length > 0 && <Button variant="secondary">Saved</Button>}
+        {subtask.length > 0 && (
+          <Button variant="secondary" onClick={handleSave} loader={isLoading}>
+            Saved
+          </Button>
+        )}
       </div>
 
       <div className="flex flex-col gap-2">
+
+        {task && task.subtask && task.subtask.length > 0 &&
+          task.subtask.map((todo) => (
+            <TodoList key={todo.id} todo={todo} />
+          ))
+        }
+
         {subtask &&
           subtask.map((todo, index) => (
             <div className="flex w-full items-center gap-3" key={index}>
