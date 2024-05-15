@@ -22,7 +22,7 @@ export function TaskBoard() {
       <div className="flex h-screen flex-col justify-between">
         <NavBar />
 
-        <section className="flex flex-grow justify-between px-5 overflow-auto">
+        <section className="flex flex-grow justify-between overflow-auto px-5">
           {columns.map((column, index) => (
             <ColumnsCards
               key={index}

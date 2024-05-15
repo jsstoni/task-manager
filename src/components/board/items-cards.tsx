@@ -19,6 +19,13 @@ export function ItemsCards({ task }: Props) {
   dayjs.extend(relativeTime);
   const duedate = dayjs().from(task.duedate, true);
 
+  let countCompleted =
+    task &&
+    task.subtask &&
+    task.subtask.filter((todo) => todo.check === true).length;
+
+  let countTodo = task && task.subtask && task.subtask.length;
+
   const handleClick = (task: Tasks) => {
     dispatch(setOnlyTask(task));
   };
@@ -49,7 +56,7 @@ export function ItemsCards({ task }: Props) {
 
         {task.subtask.length > 0 && (
           <small className="ml-auto flex items-center gap-1">
-            <BsCheck2Square /> 0/1
+            <BsCheck2Square /> {countCompleted}/{countTodo}
           </small>
         )}
       </div>
