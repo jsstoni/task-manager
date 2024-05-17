@@ -20,3 +20,23 @@ export const POST = withSession(async ({ request }) => {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 });
+
+export const DELETE = withSession(async ({ request }) => {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+    if (!id) {
+      throw new Error("ID not found");
+    }
+    const rm = await prisma.subtask.delete({ where: { id: +id } });
+    return NextResponse.json(rm, { status: 200 });
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? process.env.NODE_ENV !== "production"
+          ? error.message
+          : "Delete subtask error"
+        : "Unexpected Error";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+});

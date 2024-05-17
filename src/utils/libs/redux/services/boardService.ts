@@ -28,6 +28,14 @@ export const boardService = createApi({
         body: created,
       }),
     }),
+
+    //delete subtask from api
+    rmSubtask: builder.mutation<Subtask, number>({
+      query: (id) => ({
+        url: `/subtask?id=${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -36,4 +44,5 @@ export const {
   useCreateTaskMutation,
   useSetColumnMutation,
   useAddSubtaskMutation,
+  useRmSubtaskMutation,
 } = boardService;
