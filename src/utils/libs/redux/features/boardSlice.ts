@@ -79,11 +79,13 @@ export const boardSlice = createSlice({
         if (state.onlyTask) {
           const id = state.onlyTask.id;
           const index = state.tasks.findIndex((task) => task.id === id);
-          state.tasks[index].subtask = [
-            ...state.tasks[index].subtask,
-            ...payload,
-          ];
-          state.onlyTask.subtask = [...state.onlyTask.subtask, ...payload];
+
+          if (index !== -1) {
+            const newSubtask = [...state.tasks[index].subtask, ...payload];
+
+            state.tasks[index].subtask = newSubtask;
+            state.onlyTask.subtask = newSubtask;
+          }
         }
       },
     );
@@ -93,12 +95,17 @@ export const boardSlice = createSlice({
       (state, { payload }) => {
         const idSubtask = payload.tasks_id;
         const index = state.tasks.findIndex((task) => task.id === idSubtask);
-        const filterSubtask = state.tasks[index].subtask.filter(
-          (sub) => sub.id !== payload.id,
-        );
-        state.tasks[index].subtask = filterSubtask;
-        if (state.onlyTask) {
-          state.onlyTask.subtask = filterSubtask;
+
+        if (index !== -1) {
+          const filterSubtask = state.tasks[index].subtask.filter(
+            (sub) => sub.id !== payload.id,
+          );
+
+          state.tasks[index].subtask = filterSubtask;
+
+          if (state.onlyTask && state.onlyTask.id === idSubtask) {
+            state.onlyTask.subtask = filterSubtask;
+          }
         }
       },
     );
