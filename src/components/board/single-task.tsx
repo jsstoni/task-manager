@@ -95,11 +95,10 @@ export function SingleTask({ task }: Props) {
       <div className="my-2 flex items-center gap-2">
         <p>Subtask</p>
         <Button
-          variant="outline"
+          variant="link"
           className="ml-auto flex items-center gap-1"
           onClick={addSubtask}
         >
-          {" "}
           <BsPlusLg /> Add Subtask
         </Button>
         {subtask.length > 0 && (
@@ -109,7 +108,7 @@ export function SingleTask({ task }: Props) {
         )}
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {task &&
           task.subtask &&
           task.subtask.length > 0 &&
@@ -129,7 +128,11 @@ export function SingleTask({ task }: Props) {
                 value={todo?.title}
               />
 
-              <BsTrash size={22} onClick={() => removeSubtask(index)} />
+              <BsTrash
+                size={22}
+                onClick={() => removeSubtask(index)}
+                className="hover:cursor-pointer"
+              />
             </div>
           ))}
       </div>
