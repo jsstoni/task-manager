@@ -8,14 +8,14 @@ interface Props {
 export function BadgePriority({ value }: Props) {
   //priority variants
   const pv = {
-    low: "bg-cyan-400",
-    medium: "bg-yellow-400",
-    high: "bg-red-400",
+    low: "bg-blue-500 text-blue-950",
+    medium: "bg-yellow-500 text-yellow-950",
+    high: "bg-red-500 text-red-950",
   };
 
   return (
-    <small className={cn("rounded-md px-2 text-black", pv[value])}>
+    <span className={cn("rounded-md px-3 text-xs text-black", pv[value])}>
       {value}
-    </small>
+    </span>
   );
 }

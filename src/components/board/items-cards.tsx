@@ -1,10 +1,10 @@
 "use client";
 
-import { BadgePriority } from "@/components";
+import { BadgePriority, RowItems } from "@/components";
 import { setOnlyTask } from "@/utils/libs/redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
+import { BsCalendarDate, BsCheck2Square, BsClockFill } from "react-icons/bs";
 import { Tasks } from "@/utils/constant/tasks";
 import { useAppDispatch, useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
@@ -34,30 +34,33 @@ export function ItemsCards({ task }: Props) {
     <article
       className={cn(
         { "opacity-10": idTask === task.id },
-        "flex flex-col gap-2 rounded-md border p-4 dark:border-zinc-800 dark:bg-zinc-900 hover:dark:border-slate-800",
+        "flex flex-col items-start gap-1 rounded-md border p-3 dark:border-zinc-800 dark:bg-zinc-900 hover:dark:border-slate-800",
       )}
       draggable
       onDragStart={(ev) => onDragStart(ev, task.id)}
       onDragEnd={(ev) => onDragEnd(ev)}
       onClick={() => handleClick(task)}
     >
-      <p className="text-balance text-sm">{task.title}</p>
+      <BadgePriority value={task.priority} />
 
-      <div className="flex items-center gap-2">
-        <div className="flex items-center gap-2 text-xs text-zinc-600">
-          <BsCalendarDate /> {duedate}
-        </div>
+      <div className="my-1">
+        <p className="text-balance">{task.title}</p>
+        <p className="text-sm text-zinc-600">{task.content}</p>
       </div>
 
-      <div className="flex items-center gap-2">
-        <BadgePriority value={task.priority} />
+      <div className="flex w-full items-center gap-2 text-sm text-zinc-500">
+        <RowItems className="rounded-md bg-zinc-950/40 px-2 py-0.5">
+          <BsCalendarDate /> {duedate}
+        </RowItems>
 
-        <small>Log: {task.log}</small>
+        <RowItems>
+          <BsClockFill /> {task.log}
+        </RowItems>
 
         {task.subtask.length > 0 && (
-          <small className="ml-auto flex items-center gap-1">
+          <RowItems className="ml-auto">
             <BsCheck2Square /> {countCompleted}/{countTodo}
-          </small>
+          </RowItems>
         )}
       </div>
     </article>

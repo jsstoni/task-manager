@@ -16,6 +16,7 @@ export * from "./ui/input";
 export * from "./ui/logo";
 export * from "./ui/modal";
 export * from "./ui/nav-bar";
+export * from "./ui/row-items";
 export * from "./ui/select";
 export * from "./ui/sheet";
 export * from "./ui/switch-theme";

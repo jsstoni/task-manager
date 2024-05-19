@@ -30,7 +30,7 @@ export function Sheet({ children, hidden, size = "md", close }: Props) {
     >
       <div
         className={cn(
-          "absolute w-full overflow-auto p-5 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900",
+          "absolute w-full overflow-auto bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900",
           "bottom-0 right-0 top-0 border-l",
           vs[size],
         )}

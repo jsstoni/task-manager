@@ -80,7 +80,9 @@ export function SingleTask({ task }: Props) {
         <p className="col-span-9">{duedate}</p>
       </div>
 
-      <div className="mt-4 rounded-md bg-zinc-950 p-3">{task.content}</div>
+      <div className="mt-4 rounded-md bg-zinc-200 p-3 dark:bg-zinc-950/40">
+        {task.content}
+      </div>
 
       <div className="my-2 flex items-center gap-2">
         <p>Subtask</p>
@@ -121,7 +123,7 @@ export function SingleTask({ task }: Props) {
               <BsTrash
                 size={22}
                 onClick={() => removeSubtask(index)}
-                className="hover:cursor-pointer"
+                className="hover:cursor-pointer hover:fill-red-500"
               />
             </div>
           ))}

@@ -25,19 +25,19 @@ export const TodoList = ({ todo, remove = true }: Props) => {
   };
 
   return (
-    <div className="flex w-full items-center gap-2 rounded-md bg-zinc-200 p-2 dark:bg-zinc-800">
+    <div className="flex w-full items-center gap-3 rounded-md bg-zinc-200 p-2 dark:bg-zinc-800/40">
       <CheckList value={todo.check} />
       <p className="flex-grow">{todo.title}</p>
       {accept && (
         <BsCheck
           size={22}
           onClick={() => rm(todo.id)}
-          className="hover:cursor-pointer"
+          className="hover:cursor-pointer hover:fill-blue-500"
         />
       )}
       {remove && (
         <BsTrash
-          className="flex-shrink-0 self-baseline hover:cursor-pointer"
+          className="flex-shrink-0 self-baseline hover:cursor-pointer hover:fill-red-500"
           size={20}
           onClick={handleRemove}
         />
