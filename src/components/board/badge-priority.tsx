@@ -14,8 +14,6 @@ export function BadgePriority({ value }: Props) {
   };
 
   return (
-    <span className={cn("rounded-md px-3 text-xs text-black", pv[value])}>
-      {value}
-    </span>
+    <span className={cn("rounded-md px-3 text-black", pv[value])}>{value}</span>
   );
 }
