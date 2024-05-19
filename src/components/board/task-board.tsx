@@ -36,7 +36,7 @@ export function TaskBoard() {
 
       <FormCreate />
 
-      <Sheet hidden={openTask} size="xl" position="right">
+      <Sheet hidden={openTask} size="xl">
         {onlyTask && <SingleTask task={onlyTask} />}
       </Sheet>
     </>
