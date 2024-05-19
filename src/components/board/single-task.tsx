@@ -10,15 +10,13 @@ import {
 import dayjs from "dayjs";
 import { Subtask, Tasks } from "@/utils/constant/tasks";
 import { useState } from "react";
-import { BsPlusLg, BsTrash, BsXLg } from "react-icons/bs";
-import { useAppDispatch } from "@/utils/hooks";
-import { closeTask, useAddSubtaskMutation } from "@/utils/libs/redux";
+import { BsPlusLg, BsTrash } from "react-icons/bs";
+import { useAddSubtaskMutation } from "@/utils/libs/redux";
 
 interface Props {
   task: Tasks;
 }
 export function SingleTask({ task }: Props) {
-  const dispatch = useAppDispatch();
   const [subtask, setSubtask] = useState<Subtask[]>([]);
   const [submitSubtask, { isLoading }] = useAddSubtaskMutation();
 
@@ -60,18 +58,10 @@ export function SingleTask({ task }: Props) {
     setSubtask([]);
   }
 
-  const handleClose = () => {
-    dispatch(closeTask());
-    setSubtask([]);
-  };
-
   const duedate = dayjs(task.duedate).format("MMM D, YYYY");
   const created = dayjs(task.createdAt).format("MMM D, YYYY");
   return (
     <>
-      <Button variant="ghost" onClick={handleClose}>
-        <BsXLg />
-      </Button>
       <h1 className="mb-4 text-2xl">{task.title}</h1>
 
       <div className="grid grid-cols-12 gap-3">

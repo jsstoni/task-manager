@@ -7,15 +7,20 @@ import {
   Sheet,
   SingleTask,
 } from "@/components";
-import { useGetTasksQuery } from "@/utils/libs/redux";
+import { closeTask, useGetTasksQuery } from "@/utils/libs/redux";
 import type { Columns } from "@/utils/constant/tasks";
-import { useBoard } from "@/utils/hooks";
+import { useAppDispatch, useBoard } from "@/utils/hooks";
 
 export function TaskBoard() {
+  const dispatch = useAppDispatch();
   const { isLoading } = useGetTasksQuery(null);
   const { tasks, openTask, onlyTask } = useBoard();
 
   const columns: Columns[] = ["Backlog", "In Progress", "Test", "Done"];
+
+  const handleClose = () => {
+    dispatch(closeTask());
+  };
 
   return (
     <>
@@ -36,7 +41,7 @@ export function TaskBoard() {
 
       <FormCreate />
 
-      <Sheet hidden={openTask} size="xl">
+      <Sheet hidden={openTask} size="xl" close={handleClose}>
         {onlyTask && <SingleTask task={onlyTask} />}
       </Sheet>
     </>
