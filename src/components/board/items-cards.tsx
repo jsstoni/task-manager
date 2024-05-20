@@ -43,7 +43,7 @@ export function ItemsCards({ task }: Props) {
     >
       <div className="my-1">
         <p className="text-balance">{task.title}</p>
-        <p className="text-sm text-zinc-600">{task.content}</p>
+        <p className="line-clamp-2 text-sm text-zinc-600">{task.content}</p>
       </div>
 
       <div className="flex w-full items-center gap-2 text-sm text-zinc-500">
@@ -53,7 +53,7 @@ export function ItemsCards({ task }: Props) {
           <BsCalendarDate /> {duedate}
         </RowItems>
 
-        {task.subtask.length > 0 && (
+        {task.subtask && task.subtask.length > 0 && (
           <RowItems className="ml-auto">
             <BsCheck2Square /> {countCompleted}/{countTodo}
           </RowItems>
