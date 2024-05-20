@@ -28,16 +28,17 @@ export function FormCreate() {
   const dispatch = useAppDispatch();
   const { modalCreate } = useBoard();
 
-  const [submitTask, { isError, error }] = useCreateTaskMutation();
-
-  const onSubmit: SubmitHandler<FormCreateType> = async (data) => {
-    const task: Partial<Tasks> = { column: "Backlog", log: 0, ...data };
-    await submitTask(task).unwrap();
-  };
+  const [submitTask, { isLoading, isError, error }] = useCreateTaskMutation();
 
   const handleClose = () => {
     dispatch(closeCreate());
     reset();
+  };
+
+  const onSubmit: SubmitHandler<FormCreateType> = async (data) => {
+    const task: Partial<Tasks> = { column: "Backlog", log: 0, ...data };
+    await submitTask(task).unwrap();
+    handleClose();
   };
 
   return (
@@ -61,7 +62,12 @@ export function FormCreate() {
 
         {isError && <DisplayError value={handleError(error)} />}
 
-        <Button type="submit" className="mt-3">
+        <Button
+          type="submit"
+          className="mt-3"
+          loader={isLoading}
+          disabled={isLoading}
+        >
           Create
         </Button>
       </form>
