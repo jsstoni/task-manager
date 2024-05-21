@@ -13,6 +13,7 @@ interface Props {
 
 export const TodoList = ({ todo, remove = true }: Props) => {
   const [accept, setAccept] = useState<boolean>(false);
+  const [check, setCheck] = useState<boolean>(todo.check);
   const [rmSubtask] = useRmSubtaskMutation();
 
   const handleRemove = () => {
@@ -24,9 +25,13 @@ export const TodoList = ({ todo, remove = true }: Props) => {
     console.log(rs);
   };
 
+  const handleCheck = () => {
+    setCheck((prev) => !prev);
+  };
+
   return (
     <div className="flex w-full items-center gap-3 rounded-md bg-zinc-200 p-2 dark:bg-zinc-800/40">
-      <CheckList value={todo.check} />
+      <CheckList value={check} onClick={handleCheck} />
       <p className="flex-grow">{todo.title}</p>
       {accept && (
         <BsCheck
