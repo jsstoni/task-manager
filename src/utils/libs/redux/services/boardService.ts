@@ -36,6 +36,15 @@ export const boardService = createApi({
         method: "DELETE",
       }),
     }),
+
+    //put subtask from api
+    putSubtask: builder.mutation<Subtask, { id: number; check: boolean }>({
+      query: (data) => ({
+        url: `/subtask?id=${data.id}`,
+        method: "PUT",
+        body: { check: data.check },
+      }),
+    }),
   }),
 });
 
@@ -45,4 +54,5 @@ export const {
   useSetColumnMutation,
   useAddSubtaskMutation,
   useRmSubtaskMutation,
+  usePutSubtaskMutation,
 } = boardService;

@@ -109,6 +109,22 @@ export const boardSlice = createSlice({
         }
       },
     );
+
+    builder.addMatcher(
+      boardService.endpoints.putSubtask.matchFulfilled,
+      (state, { payload }) => {
+        const idSubtask = payload.tasks_id;
+        const index = state.tasks.findIndex((task) => task.id === idSubtask);
+
+        if (index !== -1) {
+          const filterSubtask = state.tasks[index].subtask.filter(
+            (sub) => sub.id !== payload.id,
+          );
+
+          state.tasks[index].subtask = filterSubtask;
+        }
+      },
+    );
   },
 });
 

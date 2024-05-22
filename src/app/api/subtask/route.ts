@@ -21,6 +21,31 @@ export const POST = withSession(async ({ request }) => {
   }
 });
 
+export const PUT = withSession(async ({ request }) => {
+  try {
+    const body = await request.json();
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+    if (!id) {
+      throw new Error("ID not found");
+    }
+    console.log(body.check);
+    const put = await prisma.subtask.update({
+      data: { check: body.check },
+      where: { id: +id },
+    });
+    return NextResponse.json(put, { status: 200 });
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? process.env.NODE_ENV !== "production"
+          ? error.message
+          : "Put subtask error"
+        : "Unexpected Error";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+});
+
 export const DELETE = withSession(async ({ request }) => {
   try {
     const { searchParams } = new URL(request.url);
