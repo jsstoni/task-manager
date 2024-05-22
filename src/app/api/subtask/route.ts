@@ -29,7 +29,6 @@ export const PUT = withSession(async ({ request }) => {
     if (!id) {
       throw new Error("ID not found");
     }
-    console.log(body.check);
     const put = await prisma.subtask.update({
       data: { check: body.check },
       where: { id: +id },
