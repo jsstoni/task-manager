@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo, SwitchTheme } from "@/components";
-import { BsClipboardData } from "react-icons/bs";
+import { BsKanbanFill } from "react-icons/bs";
 import { cn } from "@/utils/libs/cn";
 
 export function AsideLeft() {
@@ -21,7 +21,7 @@ export function AsideLeft() {
           })}
         >
           <Link href="/">
-            <BsClipboardData />
+            <BsKanbanFill />
           </Link>
         </li>
         <li className="mt-auto">
