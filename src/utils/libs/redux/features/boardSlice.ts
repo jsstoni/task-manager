@@ -90,6 +90,7 @@ export const boardSlice = createSlice({
       },
     );
 
+    //remove to do
     builder.addMatcher(
       boardService.endpoints.rmSubtask.matchFulfilled,
       (state, { payload }) => {
@@ -110,6 +111,7 @@ export const boardSlice = createSlice({
       },
     );
 
+    //update to do
     builder.addMatcher(
       boardService.endpoints.putSubtask.matchFulfilled,
       (state, { payload }) => {
@@ -117,9 +119,9 @@ export const boardSlice = createSlice({
         const index = state.tasks.findIndex((task) => task.id === idSubtask);
 
         if (index !== -1) {
-          const filterSubtask = state.tasks[index].subtask.filter(
-            (sub) => sub.id !== payload.id,
-          );
+          const filterSubtask = state.tasks[index].subtask
+            .filter((sub) => sub.id !== payload.id)
+            .concat(payload);
 
           state.tasks[index].subtask = filterSubtask;
         }
