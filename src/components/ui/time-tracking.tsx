@@ -91,6 +91,13 @@ export function TimeTracking() {
     window.localStorage.removeItem("timer");
   }, [dispatch]);
 
+  const handleChangeTask = (id: number) => {
+    if (counter > 0) {
+      return null;
+    }
+    dispatch(setTaskId(id));
+  };
+
   const formatTime = (seconds: number): string => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
@@ -103,8 +110,8 @@ export function TimeTracking() {
       <Select
         name="taskid"
         className="mr-2 max-w-[160px] px-2 py-1"
-        value={taskId ?? 0}
-        onChange={(e) => setTaskId(+e.target.value)}
+        value={taskId}
+        onChange={(e) => handleChangeTask(+e.target.value)}
       >
         <option>choose your task</option>
         {inProgress.map((task) => (
