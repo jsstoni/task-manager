@@ -5,11 +5,12 @@ import {
   updateTasks,
   useSetColumnMutation,
 } from "@/utils/libs/redux";
-import { useAppDispatch, useBoard } from "@/utils/hooks";
+import { useAppDispatch, useAppSelector, useBoard } from "@/utils/hooks";
 import { Columns } from "../constant/tasks";
 
 export function useDnD() {
   const dispatch = useAppDispatch();
+  const { taskId, counter } = useAppSelector((state) => state.timerSlice);
   const { idTask, whereMove, tasks, isDrag } = useBoard();
 
   const [updateColumn] = useSetColumnMutation();
@@ -30,6 +31,10 @@ export function useDnD() {
     let selectedTask = { ...tasks[taskIndex] };
 
     if (!isDrag || !whereMove || selectedTask.column === whereMove) {
+      return;
+    }
+
+    if (taskId === idTask && counter > 0) {
       return;
     }
 
