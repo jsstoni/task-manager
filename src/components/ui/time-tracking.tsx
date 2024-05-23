@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { Select } from "@/components";
 import { BsPauseFill, BsPlayFill, BsStopFill } from "react-icons/bs";
-import { useBoard } from "@/utils/hooks";
+import { useAppDispatch, useAppSelector, useBoard } from "@/utils/hooks";
+import { setCounter, setIsStart, setTaskId } from "@/utils/libs/redux";
 
 interface TimerData {
   timer: number;
@@ -13,9 +14,10 @@ interface TimerData {
 }
 
 export function TimeTracking() {
-  const [counter, setCounter] = useState<number>(0);
-  const [start, setStart] = useState<boolean>(false);
-  const [taskId, setTaskId] = useState<number | null>(null);
+  const dispatch = useAppDispatch();
+  const { counter, isStart, taskId } = useAppSelector(
+    (state) => state.timerSlice,
+  );
 
   const { tasks } = useBoard();
 
@@ -29,25 +31,27 @@ export function TimeTracking() {
     if (savedData) {
       const { timer, status, id, lastUpdate }: TimerData =
         JSON.parse(savedData);
-      setTaskId(id);
-      setStart(status === "play");
-      setCounter(
-        status === "play"
-          ? timer + Math.floor((Date.now() - lastUpdate) / 1000)
-          : timer,
+      dispatch(setTaskId(id));
+      dispatch(setIsStart(status === "play"));
+      dispatch(
+        setCounter(
+          status === "play"
+            ? timer + Math.floor((Date.now() - lastUpdate) / 1000)
+            : timer,
+        ),
       );
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    if (!start) return;
+    if (!isStart) return;
 
     const interval = setInterval(() => {
-      setCounter((prev) => prev + 1);
+      dispatch(setCounter(counter + 1));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [start]);
+  }, [isStart, counter, dispatch]);
 
   const setLocalData = (
     timer: number,
@@ -66,26 +70,26 @@ export function TimeTracking() {
   const handleStart = useCallback(() => {
     if (taskId) {
       setLocalData(counter, taskId, "play");
-      setStart(true);
+      dispatch(setIsStart(true));
       return null;
     }
     alert("choose yout task");
-  }, [counter, taskId]);
+  }, [counter, taskId, dispatch]);
 
   const handlePause = useCallback(() => {
     const localTimer = window.localStorage.getItem("timer");
     if (localTimer && taskId) {
       setLocalData(counter, taskId, "pause");
-      setStart(false);
+      dispatch(setIsStart(false));
     }
-  }, [counter, taskId]);
+  }, [counter, taskId, dispatch]);
 
   const handleStop = useCallback(() => {
-    setCounter(0);
-    setStart(false);
-    setTaskId(null);
+    dispatch(setCounter(0));
+    dispatch(setIsStart(false));
+    dispatch(setTaskId(0));
     window.localStorage.removeItem("timer");
-  }, []);
+  }, [dispatch]);
 
   const formatTime = (seconds: number): string => {
     const hrs = Math.floor(seconds / 3600);
@@ -111,15 +115,15 @@ export function TimeTracking() {
       </Select>
 
       <button
-        onClick={!start ? handleStart : handlePause}
+        onClick={!isStart ? handleStart : handlePause}
         className="rounded-full bg-gray-100 p-1 ring-1 ring-gray-400 dark:bg-zinc-900 dark:ring-zinc-600"
       >
-        {start ? <BsPauseFill size={22} /> : <BsPlayFill size={22} />}
+        {isStart ? <BsPauseFill size={22} /> : <BsPlayFill size={22} />}
       </button>
 
       <span>{formatTime(counter)}</span>
 
-      {!start && counter > 0 && <BsStopFill size={22} onClick={handleStop} />}
+      {!isStart && counter > 0 && <BsStopFill size={22} onClick={handleStop} />}
     </div>
   );
 }
