@@ -27,21 +27,6 @@ export function TimeTracking() {
     return () => clearInterval(interval);
   }, [start]);
 
-  const isTimer = useMemo(() => {
-    const hours = Math.floor(counter / 3600);
-    const restSeconds = counter % 3600;
-    const minutes = Math.floor(restSeconds / 60);
-    const seconds = restSeconds % 60;
-
-    const hourString = hours.toString().padStart(2, "0");
-    const minuteString = minutes.toString().padStart(2, "0");
-    const secondString = seconds.toString().padStart(2, "0");
-
-    return hours === 0
-      ? `${minuteString}:${secondString}`
-      : `${hourString}:${minuteString}:${secondString}`;
-  }, [counter]);
-
   const handleStart = () => {
     if (isTaskId) {
       setStart((prevStart) => !prevStart);
@@ -54,6 +39,13 @@ export function TimeTracking() {
     setCounter(0);
     setStart(false);
     setTaskId(null);
+  };
+
+  const formatTime = (seconds: number): string => {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs.toString().padStart(2, "0")}:${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -78,7 +70,7 @@ export function TimeTracking() {
         {start ? <BsPauseFill size={22} /> : <BsPlayFill size={22} />}
       </button>
 
-      <span>{isTimer}</span>
+      <span>{formatTime(counter)}</span>
 
       {!start && counter > 0 && <BsStopFill size={22} onClick={handleStop} />}
     </div>
