@@ -40,7 +40,7 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
       className={cn(
         { "visible bg-black/70": isOpen },
         { invisible: !isOpen },
-        "fixed inset-0 z-50 flex size-full flex-col items-center transition-colors",
+        "fixed inset-0 z-50 flex size-full flex-col items-center backdrop-blur-sm transition-colors",
       )}
     >
       <div

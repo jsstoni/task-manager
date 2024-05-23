@@ -21,7 +21,7 @@ export function Sheet({ children, hidden, size = "md", close }: Props) {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-20 size-full transform transition-transform duration-300 ease-in-out",
+        "fixed inset-0 z-20 size-full transform backdrop-blur-sm transition-transform duration-300 ease-in-out",
         {
           "visible translate-x-0": hidden,
           "translate-x-full": !hidden,
