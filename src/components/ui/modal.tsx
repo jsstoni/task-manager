@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { BsX } from "react-icons/bs";
 import { cn } from "@/utils/libs/cn";
 
-type SizeType = "xs" | "md" | "lg" | "xl" | "default";
+type SizeType = "xs" | "sm" | "md" | "lg" | "xl" | "default";
 
 interface Props {
   children?: React.ReactNode;
@@ -29,6 +29,7 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
 
   const windowSize = {
     xs: "max-w-xs",
+    sm: "max-w-sm",
     md: "max-w-xl",
     lg: "max-w-2xl",
     xl: "max-w-5xl",
