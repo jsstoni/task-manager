@@ -45,6 +45,15 @@ export const boardService = createApi({
         body: { check: data.check },
       }),
     }),
+
+    //put log from api
+    putLog: builder.mutation<Tasks, { counter: number; id: number }>({
+      query: (data) => ({
+        url: `/board/log`,
+        method: "PUT",
+        body: { counter: data.counter, id: data.id },
+      }),
+    }),
   }),
 });
 
@@ -55,4 +64,5 @@ export const {
   useAddSubtaskMutation,
   useRmSubtaskMutation,
   usePutSubtaskMutation,
+  usePutLogMutation,
 } = boardService;

@@ -4,7 +4,12 @@ import { useCallback, useEffect, useMemo } from "react";
 import { Select } from "@/components";
 import { BsPauseFill, BsPlayFill, BsStopFill } from "react-icons/bs";
 import { useAppDispatch, useAppSelector, useBoard } from "@/utils/hooks";
-import { setCounter, setIsStart, setTaskId } from "@/utils/libs/redux";
+import {
+  setCounter,
+  setIsStart,
+  setIsStop,
+  setTaskId,
+} from "@/utils/libs/redux";
 
 interface TimerData {
   timer: number;
@@ -85,10 +90,7 @@ export function TimeTracking() {
   }, [counter, taskId, dispatch]);
 
   const handleStop = useCallback(() => {
-    dispatch(setCounter(0));
-    dispatch(setIsStart(false));
-    dispatch(setTaskId(0));
-    window.localStorage.removeItem("timer");
+    dispatch(setIsStop(true));
   }, [dispatch]);
 
   const handleChangeTask = (id: number) => {

@@ -21,7 +21,7 @@ export const Modal = ({
   isOpen,
   size,
   close,
-  hideClose = true,
+  hideClose = false,
 }: Props) => {
   useEffect(() => {
     const closeScape = (e: KeyboardEvent) => {
@@ -62,7 +62,7 @@ export const Modal = ({
       >
         <div className="mb-3 flex items-center border-b border-gray-200 pb-2 dark:border-zinc-800">
           <p className="block text-xl">{title}</p>
-          {hideClose && (
+          {!hideClose && (
             <button onClick={() => close()} className="ml-auto">
               <BsX size={30} />
             </button>

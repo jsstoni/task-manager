@@ -4,12 +4,14 @@ interface State {
   counter: number;
   isStart: boolean;
   taskId: number;
+  isStop: boolean;
 }
 
 const initialState: State = {
   counter: 0,
   isStart: false,
   taskId: 0,
+  isStop: false,
 };
 
 export const timerSlice = createSlice({
@@ -27,9 +29,14 @@ export const timerSlice = createSlice({
     setTaskId: (state, action: PayloadAction<number>) => {
       state.taskId = action.payload;
     },
+
+    setIsStop: (state, action: PayloadAction<boolean>) => {
+      state.isStop = action.payload;
+    },
   },
 });
 
-export const { setCounter, setIsStart, setTaskId } = timerSlice.actions;
+export const { setCounter, setIsStart, setTaskId, setIsStop } =
+  timerSlice.actions;
 
 export default timerSlice.reducer;
