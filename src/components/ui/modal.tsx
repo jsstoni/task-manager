@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { BsX } from "react-icons/bs";
 import { cn } from "@/utils/libs/cn";
 
-type SizeType = "xs" | "sm" | "md" | "lg" | "xl" | "default";
+type SizeType = "xs" | "sm" | "md" | "lg" | "xl";
 
 interface Props {
   children?: React.ReactNode;
@@ -12,9 +12,17 @@ interface Props {
   isOpen: boolean;
   size?: SizeType;
   close: () => void;
+  hideClose?: boolean;
 }
 
-export const Modal = ({ children, title, isOpen, size, close }: Props) => {
+export const Modal = ({
+  children,
+  title,
+  isOpen,
+  size,
+  close,
+  hideClose = true,
+}: Props) => {
   useEffect(() => {
     const closeScape = (e: KeyboardEvent) => {
       if (e.code === "Escape") {
@@ -33,7 +41,6 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
     md: "max-w-xl",
     lg: "max-w-2xl",
     xl: "max-w-5xl",
-    default: "max-w-xl",
   };
 
   return (
@@ -50,14 +57,16 @@ export const Modal = ({ children, title, isOpen, size, close }: Props) => {
           { "scale-100 opacity-100": isOpen },
           { "scale-125 opacity-0": !isOpen },
           "mt-5 max-h-[90%] w-full overflow-auto rounded-md bg-white p-5 transition-all dark:bg-zinc-900",
-          windowSize[size || "default"],
+          windowSize[size || "md"],
         )}
       >
         <div className="mb-3 flex items-center border-b border-gray-200 pb-2 dark:border-zinc-800">
           <p className="block text-xl">{title}</p>
-          <button onClick={() => close()} className="ml-auto">
-            <BsX size={30} />
-          </button>
+          {hideClose && (
+            <button onClick={() => close()} className="ml-auto">
+              <BsX size={30} />
+            </button>
+          )}
         </div>
 
         {children}
