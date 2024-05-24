@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, TimeTracking } from "@/components";
+import { Button, ButtonFilter, TimeTracking } from "@/components";
 import { openCreate } from "@/utils/libs/redux";
 import { useAppDispatch } from "@/utils/hooks";
 
@@ -10,6 +10,8 @@ export function NavBar() {
   return (
     <section className="flex items-center gap-4 border-b px-9 py-2.5 dark:border-zinc-800">
       <h1 className="text-xl">Tasks</h1>
+
+      <ButtonFilter />
 
       <div className="ml-auto flex items-center gap-3">
         <TimeTracking />

@@ -9,6 +9,7 @@ export * from "./form/form-error";
 export * from "./form/form-login";
 export * from "./form/form-register";
 export * from "./ui/aside-left";
+export * from "./ui/button-filter";
 export * from "./ui/button";
 export * from "./ui/CheckList";
 export * from "./ui/display-error";
