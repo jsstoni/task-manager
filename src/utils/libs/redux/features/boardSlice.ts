@@ -73,6 +73,7 @@ export const boardSlice = createSlice({
       },
     );
 
+    //new subtaks
     builder.addMatcher(
       boardService.endpoints.addSubtask.matchFulfilled,
       (state, { payload }) => {
@@ -121,7 +122,8 @@ export const boardSlice = createSlice({
         if (index !== -1) {
           const filterSubtask = state.tasks[index].subtask
             .filter((sub) => sub.id !== payload.id)
-            .concat(payload);
+            .concat(payload)
+            .sort((a, b) => a.id - b.id);
 
           state.tasks[index].subtask = filterSubtask;
         }
