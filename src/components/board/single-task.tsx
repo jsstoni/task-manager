@@ -5,6 +5,8 @@ import {
   Button,
   CheckList,
   Input,
+  TimeDue,
+  TimeLog,
   TodoList,
 } from "@/components";
 import dayjs from "dayjs";
@@ -71,13 +73,17 @@ export function SingleTask({ task }: Props) {
         </p>
 
         <p className="col-span-3 dark:text-zinc-600">Status</p>
-        <p className="col-span-9">{task.column}</p>
+        <p className="col-span-9 flex gap-2">
+          {task.column} <TimeLog value={task.log} />
+        </p>
 
         <p className="col-span-3 dark:text-zinc-600">Created</p>
         <p className="col-span-9">{created}</p>
 
         <p className="col-span-3 dark:text-zinc-600">Due Date</p>
-        <p className="col-span-9">{duedate}</p>
+        <p className="col-span-9 flex gap-2">
+          {duedate} <TimeDue value={task.duedate} />
+        </p>
       </div>
 
       <div className="mt-4 rounded-md bg-zinc-200 p-3 dark:bg-zinc-950/40">

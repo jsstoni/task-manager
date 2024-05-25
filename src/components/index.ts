@@ -3,6 +3,7 @@ export * from "./board/columns-cards";
 export * from "./board/items-cards";
 export * from "./board/single-task";
 export * from "./board/task-board";
+export * from "./board/time-due";
 export * from "./board/time-log";
 export * from "./board/todo-list";
 export * from "./form/form-create";

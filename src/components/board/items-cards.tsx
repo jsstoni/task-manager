@@ -1,12 +1,11 @@
 "use client";
 
-import { BadgePriority, RowItems, TimeLog } from "@/components";
+import { BadgePriority, RowItems, TimeDue, TimeLog } from "@/components";
 import { setOnlyTask } from "@/utils/libs/redux";
-import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
+import { BsCheck2Square } from "react-icons/bs";
 import { Tasks } from "@/utils/constant/tasks";
 import { useAppDispatch, useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
-import { formatRelativeTime } from "@/utils/time";
 
 interface Props {
   task: Tasks;
@@ -15,7 +14,6 @@ interface Props {
 export function ItemsCards({ task }: Props) {
   const dispatch = useAppDispatch();
   const { onDragStart, onDragEnd, idTask } = useDnD();
-  const duedate = formatRelativeTime(task.duedate);
 
   let countCompleted =
     task &&
@@ -49,9 +47,7 @@ export function ItemsCards({ task }: Props) {
       <div className="flex w-full items-center gap-2 text-sm text-zinc-500">
         <BadgePriority value={task.priority} />
 
-        <RowItems className="rounded-md bg-zinc-100 px-2 py-0.5 dark:bg-zinc-950/30">
-          <BsCalendarDate /> {duedate}
-        </RowItems>
+        <TimeDue value={task.duedate} />
 
         {task.subtask && task.subtask.length > 0 && (
           <RowItems className="ml-auto">
