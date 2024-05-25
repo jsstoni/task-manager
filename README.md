@@ -2,6 +2,8 @@
   📋 Vanto
 </h1>
 
+Simplify communication on your projects and streamline task management designed to take your freelance work to the next level.
+
 ## Features
 
 - ⚙️ Prisma ORM: For robust and efficient database management.
