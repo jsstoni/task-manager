@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo } from "react";
-import { ItemsCards } from "@/components";
+import { ItemsCards, RowItems } from "@/components";
 import { Columns, Tasks } from "@/utils/constant/tasks";
 import { useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
+import { BsCircleFill } from "react-icons/bs";
 
 interface Props {
   column: Columns;
@@ -21,10 +22,10 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
   );
   //column variant
   const cv = {
-    Backlog: "border-l-4 border-zinc-400 px-4",
-    "In Progress": "border-l-4 border-yellow-400 px-4",
-    Test: "border-l-4 border-blue-400 px-4",
-    Done: "border-l-4 border-green-400 px-4",
+    Backlog: "fill-zinc-400",
+    "In Progress": "fill-yellow-400",
+    Test: "fill-blue-400",
+    Done: "fill-green-400",
   };
 
   return (
@@ -34,12 +35,13 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
       onDrop={onDrop}
       onDragEnd={(ev) => onDragEnd(ev)}
     >
-      <p className={cn("flex items-center", cv[column])}>
-        {column}{" "}
-        <small className="ml-3 rounded-md bg-zinc-200 px-2 dark:bg-zinc-900">
+      <RowItems>
+        <BsCircleFill className={cn("mr-2", cv[column])} />
+        <p>{column}</p>
+        <small className="ml-1 rounded-md bg-zinc-200 px-2 py-0.5 dark:bg-zinc-900">
           {tasksByColumns.length}
         </small>
-      </p>
+      </RowItems>
 
       {loading && <span>loading...</span>}
 
