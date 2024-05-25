@@ -1,13 +1,12 @@
 "use client";
 
-import { BadgePriority, RowItems } from "@/components";
+import { BadgePriority, RowItems, TimeLog } from "@/components";
 import { setOnlyTask } from "@/utils/libs/redux";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { BsCalendarDate, BsCheck2Square } from "react-icons/bs";
 import { Tasks } from "@/utils/constant/tasks";
 import { useAppDispatch, useDnD } from "@/utils/hooks";
 import { cn } from "@/utils/libs/cn";
+import { formatRelativeTime } from "@/utils/time";
 
 interface Props {
   task: Tasks;
@@ -16,8 +15,7 @@ interface Props {
 export function ItemsCards({ task }: Props) {
   const dispatch = useAppDispatch();
   const { onDragStart, onDragEnd, idTask } = useDnD();
-  dayjs.extend(relativeTime);
-  const duedate = dayjs().from(task.duedate, true);
+  const duedate = formatRelativeTime(task.duedate);
 
   let countCompleted =
     task &&
@@ -41,6 +39,8 @@ export function ItemsCards({ task }: Props) {
       onDragEnd={(ev) => onDragEnd(ev)}
       onClick={() => handleClick(task)}
     >
+      <TimeLog value={task.log} />
+
       <div className="my-1">
         <p className="text-balance">{task.title}</p>
         <p className="line-clamp-2 text-sm text-zinc-600">{task.content}</p>
