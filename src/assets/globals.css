@@ -18,6 +18,10 @@
   select option {
     @apply dark:bg-zinc-900;
   }
+
+  input[type="checkbox"] {
+    @apply mr-1.5 scale-125 transform;
+  }
 }
 
 @layer utilities {

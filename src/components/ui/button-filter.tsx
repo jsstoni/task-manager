@@ -21,11 +21,11 @@ export function ButtonFilter() {
         <BsFilter /> Filters
       </Button>
       {open && (
-        <div className="absolute left-0 top-6 z-10 w-[300px] rounded-md border bg-white p-3 dark:border-zinc-700 dark:bg-zinc-700">
-          <small className="text-zinc-800">keyword</small>
+        <div className="absolute left-0 top-6 z-10 w-[300px] rounded-md border bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
+          <small className="text-zinc-700">keyword</small>
           <Input name="keyword" placeholder="enter a keyword" />
 
-          <small className="text-zinc-800">Expiration</small>
+          <small className="mt-3 block text-zinc-700">Expiration</small>
           <label htmlFor="exp_day">
             <Input type="checkbox" className="w-auto" id="exp_day" /> expires
             the next day
@@ -39,7 +39,7 @@ export function ButtonFilter() {
             next month
           </label>
 
-          <small className="text-zinc-800">Priority</small>
+          <small className="mt-3 block text-zinc-700">Priority</small>
           <label htmlFor="low">
             <Input type="checkbox" className="w-auto" id="low" /> Low
           </label>
