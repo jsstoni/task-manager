@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { formCreate, updateColumn } from "@/utils/constant/forms";
 import { prisma } from "@/utils/libs/prisma";
 import { withSession } from "@/utils/libs/auth/session";
+import { handleCatchError } from "@/utils/handle-error";
 
 //get all tasks per user
 export const GET = withSession(async ({ session }) => {
@@ -20,13 +21,7 @@ export const GET = withSession(async ({ session }) => {
 
     return NextResponse.json(tasks, { status: 200 });
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? process.env.NODE_ENV !== "production"
-          ? error.message
-          : "Tasks Error"
-        : "Unexpected Error";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return handleCatchError(error, "Tasks Error");
   }
 });
 
@@ -50,13 +45,7 @@ export const POST = withSession(async ({ request, session }) => {
 
     return NextResponse.json(newTask, { status: 201 });
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? process.env.NODE_ENV !== "production"
-          ? error.message
-          : "Created task error"
-        : "Unexpected Error";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return handleCatchError(error, "Created task error");
   }
 });
 
@@ -82,12 +71,6 @@ export const PUT = withSession(async ({ request, session }) => {
 
     return NextResponse.json(updateTask, { status: 200 });
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? process.env.NODE_ENV !== "production"
-          ? error.message
-          : "Updated task error"
-        : "Unexpected Error";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return handleCatchError(error, "Updated task error");
   }
 });
