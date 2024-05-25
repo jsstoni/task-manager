@@ -34,3 +34,10 @@ export const formCreate = z.object({
 });
 
 export type FormCreateType = z.infer<typeof formCreate>;
+
+export const updateColumn = z.object({
+  id: z.number().min(1, { message: "ID is required" }),
+  column: z.enum(["Backlog", "In Progress", "Test", "Done"]),
+});
+
+export type UpdateColumnType = z.infer<typeof updateColumn>;

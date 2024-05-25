@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { formCreate } from "@/utils/constant/forms";
+import { formCreate, updateColumn } from "@/utils/constant/forms";
 import { prisma } from "@/utils/libs/prisma";
 import { withSession } from "@/utils/libs/auth/session";
 
+//get all tasks per user
 export const GET = withSession(async ({ session }) => {
   try {
     const tasks = await prisma.tasks.findMany({
@@ -29,6 +30,7 @@ export const GET = withSession(async ({ session }) => {
   }
 });
 
+//create a new task
 export const POST = withSession(async ({ request, session }) => {
   try {
     const body = await request.json();
@@ -58,9 +60,20 @@ export const POST = withSession(async ({ request, session }) => {
   }
 });
 
+//update task column
 export const PUT = withSession(async ({ request, session }) => {
   try {
     const body = await request.json();
+
+    const isValid = updateColumn.safeParse(body);
+
+    if (!isValid.success) {
+      const { errors } = isValid.error;
+      return NextResponse.json(
+        { error: { message: "invalid request", errors } },
+        { status: 500 },
+      );
+    }
 
     const updateTask = await prisma.tasks.update({
       where: { id: body.id, user_id: session.userId },
