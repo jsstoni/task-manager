@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Columns, Tasks } from "@/utils/constant/tasks";
+import { Columns, Expire, Priority, Tasks } from "@/utils/constant/tasks";
 import { boardService } from "../services";
+import { filterExpire } from "@/utils/time";
+
+interface Filter {
+  keyword: string;
+  priority: Priority[];
+  expire: Expire[];
+}
 
 interface State {
+  originalTasks: Tasks[];
   tasks: Tasks[];
   isDrag: boolean;
   modalCreate: boolean;
@@ -13,6 +21,7 @@ interface State {
 }
 
 const initialState: State = {
+  originalTasks: [],
   tasks: [],
   isDrag: false,
   modalCreate: false,
@@ -55,6 +64,19 @@ export const boardSlice = createSlice({
       state.whereMove = null;
       state.isDrag = false;
     },
+    filterTasks: (state, action: PayloadAction<Filter>) => {
+      const { keyword, priority, expire } = action.payload;
+      state.tasks = state.originalTasks.filter((task) => {
+        const matchesKeyword = task.content.includes(keyword);
+        const matchesPriority =
+          priority.length === 0 ||
+          priority.some((p) => task.priority.includes(p));
+        const matchesExpire =
+          expire.length === 0 ||
+          expire.some((exp) => filterExpire(new Date(task.duedate), exp));
+        return matchesKeyword && matchesPriority && matchesExpire;
+      });
+    },
   },
   extraReducers: (builder) => {
     // You will get the tasks when you complete the API call
@@ -62,6 +84,7 @@ export const boardSlice = createSlice({
       boardService.endpoints.getTasks.matchFulfilled,
       (state, { payload }) => {
         state.tasks = payload;
+        state.originalTasks = payload;
       },
     );
 
@@ -141,6 +164,7 @@ export const {
   setOnlyTask,
   closeTask,
   clean,
+  filterTasks,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

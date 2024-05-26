@@ -16,7 +16,7 @@ Simplify communication on your projects and streamline task management designed 
 
 ## To Do
 
-- [ ] NavBar -> button (filter)
+- [x] NavBar -> button (filter)
 - [x] Time-Tracking (Record task time), API
 - [ ] Integrate AI to generate subtasks
 - [ ] create a server for real-time chat

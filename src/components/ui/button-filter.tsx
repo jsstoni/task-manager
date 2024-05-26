@@ -1,13 +1,16 @@
 "use client";
 
 import { BsFilter } from "react-icons/bs";
-import { Button } from "./button";
+import { Button, Input } from "@/components";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/utils/libs/cn";
-import { Input } from "./input";
+import { useAppDispatch } from "@/utils/hooks";
+import { filterTasks } from "@/utils/libs/redux";
+import { Expire, Priority } from "@/utils/constant/tasks";
 
 export function ButtonFilter() {
   const [open, setOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -25,6 +28,19 @@ export function ButtonFilter() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [ref]);
+
+  function handleFilter(formData: FormData) {
+    const keyword = formData.get("keyword");
+    const expire = formData.getAll("expire[]");
+    const priority = formData.getAll("priority[]");
+    dispatch(
+      filterTasks({
+        keyword: keyword as string,
+        priority: priority as Priority[],
+        expire: expire as Expire[],
+      }),
+    );
+  }
 
   return (
     <div className="relative" ref={ref}>
@@ -44,33 +60,78 @@ export function ButtonFilter() {
           { "invisible max-h-0": !open, "max-h-screen": open },
         )}
       >
-        <small className="text-zinc-700">keyword</small>
-        <Input name="keyword" placeholder="enter a keyword" />
+        <form action={handleFilter}>
+          <small className="text-zinc-700">keyword</small>
+          <Input name="keyword" placeholder="enter a keyword" />
 
-        <small className="mt-3 block text-zinc-700">Expiration</small>
-        <label htmlFor="exp_day">
-          <Input type="checkbox" className="w-auto" id="exp_day" /> expires the
-          next day
-        </label>
-        <label htmlFor="exp_week">
-          <Input type="checkbox" className="w-auto" id="exp_week" /> due next
-          week
-        </label>
-        <label htmlFor="exp_month">
-          <Input type="checkbox" className="w-auto" id="exp_month" /> expires
-          next month
-        </label>
+          <small className="mt-3 block text-zinc-700">Expiration</small>
+          <label htmlFor="exp_day">
+            <Input
+              type="checkbox"
+              name="expire[]"
+              value="day"
+              className="w-auto"
+              id="exp_day"
+            />
+            expires the next day
+          </label>
+          <label htmlFor="exp_week">
+            <Input
+              type="checkbox"
+              name="expire[]"
+              value="week"
+              className="w-auto"
+              id="exp_week"
+            />
+            due next week
+          </label>
+          <label htmlFor="exp_month">
+            <Input
+              type="checkbox"
+              name="expire[]"
+              value="month"
+              className="w-auto"
+              id="exp_month"
+            />
+            expires next month
+          </label>
 
-        <small className="mt-3 block text-zinc-700">Priority</small>
-        <label htmlFor="low">
-          <Input type="checkbox" className="w-auto" id="low" /> Low
-        </label>
-        <label htmlFor="medium">
-          <Input type="checkbox" className="w-auto" id="medium" /> Medium
-        </label>
-        <label htmlFor="high">
-          <Input type="checkbox" className="w-auto" id="high" /> High
-        </label>
+          <small className="mt-3 block text-zinc-700">Priority</small>
+          <label htmlFor="low">
+            <Input
+              type="checkbox"
+              name="priority[]"
+              value="low"
+              className="w-auto"
+              id="low"
+            />
+            Low
+          </label>
+          <label htmlFor="medium">
+            <Input
+              type="checkbox"
+              name="priority[]"
+              value="medium"
+              className="w-auto"
+              id="medium"
+            />
+            Medium
+          </label>
+          <label htmlFor="high">
+            <Input
+              type="checkbox"
+              name="priority[]"
+              value="high"
+              className="w-auto"
+              id="high"
+            />
+            High
+          </label>
+
+          <Button type="submit" variant="secondary" className="py-0">
+            Filter
+          </Button>
+        </form>
       </div>
     </div>
   );

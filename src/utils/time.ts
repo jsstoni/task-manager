@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { Expire } from "./constant/tasks";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -30,4 +31,21 @@ export function formatRelativeTime(date: string) {
 
 export function timeDifference(date: string) {
   return dayjs(date).diff(dayjs(), "day");
+}
+
+export function filterExpire(dueDate: Date, expire: Expire) {
+  const currentDate = new Date();
+  if (expire === "day") {
+    currentDate.setDate(currentDate.getDate() + 1);
+    return currentDate.toDateString() === dueDate.toDateString();
+  } else if (expire === "week") {
+    const nextWeek = new Date();
+    nextWeek.setDate(currentDate.getDate() + 7);
+    return dueDate > currentDate && dueDate <= nextWeek;
+  } else if (expire === "month") {
+    const nextMonth = new Date();
+    nextMonth.setMonth(currentDate.getMonth() + 1);
+    return dueDate > currentDate && dueDate <= nextMonth;
+  }
+  return false;
 }
