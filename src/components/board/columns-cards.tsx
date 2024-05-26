@@ -30,12 +30,12 @@ export function ColumnsCards({ column, loading, tasks }: Props) {
 
   return (
     <section
-      className="columns-card relative flex flex-1 select-none flex-col gap-4 overflow-auto p-4"
+      className="columns-card relative flex flex-1 select-none flex-col gap-4 overflow-auto px-4"
       onDragOver={(ev) => onDragOver(ev, column)}
       onDrop={onDrop}
       onDragEnd={(ev) => onDragEnd(ev)}
     >
-      <RowItems>
+      <RowItems className="sticky left-0 top-0 bg-white pt-4 dark:bg-zinc-950">
         <BsCircleFill className={cn("mr-2", cv[column])} />
         <p>{column}</p>
         <small className="ml-1 rounded-md bg-zinc-200 px-2 py-0.5 dark:bg-zinc-900">
