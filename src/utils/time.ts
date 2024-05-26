@@ -24,6 +24,10 @@ export function formatSecondsToElapsedTime(seconds: number) {
   return formattedTime;
 }
 
-export function formatRelativeTime(date: string | undefined) {
-  return dayjs().from(date, true);
+export function formatRelativeTime(date: string) {
+  return dayjs().to(dayjs(date));
+}
+
+export function timeDifference(date: string) {
+  return dayjs(date).diff(dayjs(), "day");
 }
