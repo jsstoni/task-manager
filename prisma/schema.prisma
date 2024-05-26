@@ -29,7 +29,7 @@ model Tasks {
   priority  String
   log       Int       @db.Int
   column    String    @default("Backlog")
-  duedate   DateTime?
+  duedate   DateTime
   usersId   Users     @relation(fields: [user_id], references: [id])
   user_id   Int
   subtask   Subtask[]

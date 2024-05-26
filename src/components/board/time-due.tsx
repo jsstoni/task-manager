@@ -3,7 +3,7 @@ import { RowItems } from "../ui/row-items";
 import { formatRelativeTime } from "@/utils/time";
 
 interface Props {
-  value: string | undefined;
+  value: string;
 }
 
 export function TimeDue({ value }: Props) {
