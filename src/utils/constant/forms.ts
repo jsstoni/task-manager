@@ -35,6 +35,12 @@ export const formCreate = z.object({
 
 export type FormCreateType = z.infer<typeof formCreate>;
 
+export const subtaskCreate = z.object({
+  title: z.string().min(1),
+  check: z.boolean(),
+  tasks_id: z.number().min(1),
+});
+
 export const updateColumn = z.object({
   id: z.number().min(1, { message: "ID is required" }),
   column: z.enum(["Backlog", "In Progress", "Test", "Done"]),
