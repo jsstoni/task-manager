@@ -6,6 +6,7 @@ export * from "./board/task-board";
 export * from "./board/time-due";
 export * from "./board/time-log";
 export * from "./board/todo-list";
+export * from "./contacts/side-column";
 export * from "./form/form-create";
 export * from "./form/form-error";
 export * from "./form/form-login";
