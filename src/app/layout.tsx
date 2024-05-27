@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 
 import "@/utils/env";
 import "../assets/globals.css";
+import { AsideLeft } from "@/components";
 
 export const metadata: Metadata = {
   title: "Vanto",
@@ -20,6 +21,8 @@ export default function RootLayout({
       <body>
         <Providers>
           <ThemeProvider defaultTheme="dark" attribute="class">
+            <AsideLeft />
+
             {children}
           </ThemeProvider>
         </Providers>

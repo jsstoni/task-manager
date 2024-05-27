@@ -1,13 +1,9 @@
-import { AsideLeft, TaskBoard } from "@/components";
+import { TaskBoard } from "@/components";
 
 export default function Home() {
   return (
-    <>
-      <AsideLeft />
-
-      <main className="relative ml-[60px] flex-grow">
-        <TaskBoard />
-      </main>
-    </>
+    <main className="relative ml-[60px] flex-grow">
+      <TaskBoard />
+    </main>
   );
 }
