@@ -92,6 +92,7 @@ export const boardSlice = createSlice({
     builder.addMatcher(
       boardService.endpoints.createTask.matchFulfilled,
       (state, { payload }) => {
+        state.originalTasks.push(payload);
         state.tasks.push(payload);
       },
     );
