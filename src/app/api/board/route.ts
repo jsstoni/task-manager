@@ -42,8 +42,9 @@ export const POST = withSession(async ({ request, session }) => {
     }
 
     const newTask = await prisma.tasks.create({ data: body });
+    const task = { ...newTask, subtask: [] };
 
-    return NextResponse.json(newTask, { status: 201 });
+    return NextResponse.json(task, { status: 201 });
   } catch (error) {
     return handleCatchError(error, "Created task error");
   }
