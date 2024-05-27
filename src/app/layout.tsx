@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Providers } from "@/utils/libs/redux";
-import { ThemeProvider } from "next-themes";
 
 import "@/utils/env";
 import "../assets/globals.css";
@@ -20,11 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <ThemeProvider defaultTheme="dark" attribute="class">
-            <AsideLeft />
-
-            {children}
-          </ThemeProvider>
+          <AsideLeft />
+          {children}
         </Providers>
       </body>
     </html>
