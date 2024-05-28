@@ -17,7 +17,10 @@ export function NavBar() {
       <div className="ml-auto flex items-center gap-3">
         <TimeTracking />
 
-        <Button className="flex items-center px-2 py-0.5" onClick={() => dispatch(openCreate())}>
+        <Button
+          className="flex items-center px-2 py-0.5"
+          onClick={() => dispatch(openCreate())}
+        >
           <BsPlusLg className="mr-2" /> New Task
         </Button>
       </div>
