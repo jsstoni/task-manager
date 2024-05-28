@@ -1,5 +1,5 @@
 import { BsClock } from "react-icons/bs";
-import { RowItems } from "../ui/row-items";
+import { RowItems } from "@/components";
 import { formatSecondsToElapsedTime } from "@/utils/time";
 
 interface Props {

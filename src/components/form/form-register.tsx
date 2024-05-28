@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Button, FormError, Input } from "@/components";
+import { Button, FormError, Input, DisplayError } from "@/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import signup from "@/utils/actions/signup";
 import { formRegister, FormRegisterType } from "@/utils/constant/forms";
 import { useState } from "react";
-import { DisplayError } from "../ui/display-error";
 
 export function FormRegister() {
   const [error, setError] = useState<string>("");

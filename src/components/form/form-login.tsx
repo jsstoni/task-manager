@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, FormError, Input } from "@/components";
+import { Button, FormError, Input, DisplayError } from "@/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { formLogin, FormLoginType } from "@/utils/constant/forms";
 import { useState } from "react";
-import { DisplayError } from "../ui/display-error";
 
 export function FormLogin() {
   const [error, setError] = useState<string>("");

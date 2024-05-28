@@ -1,5 +1,5 @@
 import { BsCalendarDate } from "react-icons/bs";
-import { RowItems } from "../ui/row-items";
+import { RowItems } from "@/components";
 import { formatRelativeTime, timeDifference } from "@/utils/time";
 import { cn } from "@/utils/libs/cn";
 
