@@ -14,10 +14,11 @@ datasource db {
 }
 
 model Users {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique @db.Char(60)
+  id       Int        @id @default(autoincrement())
+  email    String     @unique @db.Char(60)
   password String
   Tasks    Tasks[]
+  Contacts Contacts[]
 
   @@map("users")
 }
@@ -49,4 +50,17 @@ model Subtask {
   updatedAt DateTime @default(now()) @updatedAt
 
   @@map("subtask")
+}
+
+model Contacts {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  url       String
+  usersId   Users    @relation(fields: [user_id], references: [id])
+  user_id   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("contacts")
 }
