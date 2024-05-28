@@ -28,6 +28,9 @@ export function CreateModal() {
           <label htmlFor="mail">Email</label>
           <Input name="mail" id="mail" />
 
+          <label htmlFor="url">Url</label>
+          <Input name="url" id="url" />
+
           <Button variant="secondary" className="mt-4">
             Save
           </Button>
