@@ -3,6 +3,7 @@
 import { Button, ButtonFilter, TimeTracking } from "@/components";
 import { openCreate } from "@/utils/libs/redux";
 import { useAppDispatch } from "@/utils/hooks";
+import { BsPlusLg } from "react-icons/bs";
 
 export function NavBar() {
   const dispatch = useAppDispatch();
@@ -16,8 +17,8 @@ export function NavBar() {
       <div className="ml-auto flex items-center gap-3">
         <TimeTracking />
 
-        <Button className="px-4 py-0.5" onClick={() => dispatch(openCreate())}>
-          New Task
+        <Button className="flex items-center px-2 py-0.5" onClick={() => dispatch(openCreate())}>
+          <BsPlusLg className="mr-2" /> New Task
         </Button>
       </div>
     </section>

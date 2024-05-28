@@ -12,7 +12,7 @@
   }
 
   a {
-    @apply text-left text-blue-500 hover:text-blue-800 hover:underline;
+    @apply text-left text-zinc-600 hover:underline;
   }
 
   select option {
@@ -34,6 +34,6 @@
   }
 
   .aside a svg {
-    @apply h-[20px] w-[20px];
+    @apply h-[22px] w-[22px];
   }
 }

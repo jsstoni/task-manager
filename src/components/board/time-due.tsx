@@ -16,9 +16,9 @@ export function TimeDue({ value }: Props) {
       className={cn(
         "rounded-md bg-zinc-200 px-2 py-0.5 text-xs dark:bg-zinc-950/30",
         {
-          "text-zinc-500": timeDiff > 3,
-          "text-yellow-500": timeDiff <= 3,
-          "text-red-500": timeDiff < 0,
+          "text-zinc-600": timeDiff > 3,
+          "text-yellow-600": timeDiff <= 3,
+          "text-red-600": timeDiff < 0,
         },
       )}
     >
