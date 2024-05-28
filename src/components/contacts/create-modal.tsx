@@ -1,10 +1,8 @@
 "use client";
 
 import { BsPlusLg } from "react-icons/bs";
-import { Button } from "../ui/button";
-import { Modal } from "../ui/modal";
+import { Button, Modal, FormContact } from "@/components";
 import { useState } from "react";
-import { Input } from "../ui/input";
 
 export function CreateModal() {
   const [open, setOpen] = useState<boolean>(false);
@@ -21,20 +19,7 @@ export function CreateModal() {
         isOpen={open}
         close={() => setOpen(false)}
       >
-        <form action="">
-          <label htmlFor="name">Name</label>
-          <Input name="name" id="name" />
-
-          <label htmlFor="mail">Email</label>
-          <Input name="mail" id="mail" />
-
-          <label htmlFor="url">Url</label>
-          <Input name="url" id="url" />
-
-          <Button variant="secondary" className="mt-4">
-            Save
-          </Button>
-        </form>
+        <FormContact />
       </Modal>
     </>
   );

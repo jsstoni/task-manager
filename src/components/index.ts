@@ -9,6 +9,7 @@ export * from "./board/todo-list";
 export * from "./contacts/create-modal";
 export * from "./contacts/side-column";
 export * from "./contacts/user-list";
+export * from "./form/form-contact";
 export * from "./form/form-create";
 export * from "./form/form-error";
 export * from "./form/form-login";
