@@ -2,7 +2,7 @@
 
 import { BsFilter } from "react-icons/bs";
 import { Button, Input } from "@/components";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { cn } from "@/utils/libs/cn";
 import { useAppDispatch } from "@/utils/hooks";
 import { filterTasks } from "@/utils/libs/redux";
@@ -11,35 +11,44 @@ import { Expire, Priority } from "@/utils/constant/tasks";
 export function ButtonFilter() {
   const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
   const ref = useRef<HTMLDivElement>(null);
 
-  // Handle click outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
+  const [formValues, setFormValues] = useState({
+    keyword: "",
+    expire: [],
+    priority: [],
+  });
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
-
-  function handleFilter(formData: FormData) {
-    const keyword = formData.get("keyword");
-    const expire = formData.getAll("expire[]");
-    const priority = formData.getAll("priority[]");
+  function handleFilter(values: typeof formValues) {
     dispatch(
       filterTasks({
-        keyword: keyword as string,
-        priority: priority as Priority[],
-        expire: expire as Expire[],
+        keyword: values.keyword,
+        priority: values.priority as Priority[],
+        expire: values.expire as Expire[],
       }),
     );
+  }
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value, type, checked } = event.target;
+    setFormValues((prevValues) => {
+      let updatedValues;
+      if (type === "checkbox") {
+        const values = prevValues[name as keyof typeof prevValues] as string[];
+        if (checked) {
+          updatedValues = { ...prevValues, [name]: [...values, value] };
+        } else {
+          updatedValues = {
+            ...prevValues,
+            [name]: values.filter((v) => v !== value),
+          };
+        }
+      } else {
+        updatedValues = { ...prevValues, [name]: value };
+      }
+      handleFilter(updatedValues); // Llamar a handleFilter directamente
+      return updatedValues;
+    });
   }
 
   return (
@@ -60,38 +69,46 @@ export function ButtonFilter() {
           { "invisible max-h-0": !open, "max-h-screen": open },
         )}
       >
-        <form action={handleFilter}>
+        <form>
           <small className="text-zinc-700">keyword</small>
-          <Input name="keyword" placeholder="enter a keyword" />
+          <Input
+            name="keyword"
+            placeholder="enter a keyword"
+            value={formValues.keyword}
+            onChange={handleChange}
+          />
 
           <small className="mt-3 block text-zinc-700">Expiration</small>
           <label htmlFor="exp_day">
             <Input
               type="checkbox"
-              name="expire[]"
+              name="expire"
               value="day"
               className="w-auto"
               id="exp_day"
+              onChange={handleChange}
             />
             expires the next day
           </label>
           <label htmlFor="exp_week">
             <Input
               type="checkbox"
-              name="expire[]"
+              name="expire"
               value="week"
               className="w-auto"
               id="exp_week"
+              onChange={handleChange}
             />
             due next week
           </label>
           <label htmlFor="exp_month">
             <Input
               type="checkbox"
-              name="expire[]"
+              name="expire"
               value="month"
               className="w-auto"
               id="exp_month"
+              onChange={handleChange}
             />
             expires next month
           </label>
@@ -100,37 +117,36 @@ export function ButtonFilter() {
           <label htmlFor="low">
             <Input
               type="checkbox"
-              name="priority[]"
+              name="priority"
               value="low"
               className="w-auto"
               id="low"
+              onChange={handleChange}
             />
             Low
           </label>
           <label htmlFor="medium">
             <Input
               type="checkbox"
-              name="priority[]"
+              name="priority"
               value="medium"
               className="w-auto"
               id="medium"
+              onChange={handleChange}
             />
             Medium
           </label>
           <label htmlFor="high">
             <Input
               type="checkbox"
-              name="priority[]"
+              name="priority"
               value="high"
               className="w-auto"
               id="high"
+              onChange={handleChange}
             />
             High
           </label>
-
-          <Button type="submit" variant="secondary" className="py-0">
-            Filter
-          </Button>
         </form>
       </div>
     </div>
