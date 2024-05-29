@@ -24,3 +24,16 @@ export function handleCatchError(err: unknown, message: string): Response {
       : "Unexpected Error";
   return NextResponse.json({ error }, { status: 500 });
 }
+
+export function handleServerError(
+  err: unknown,
+  message: string,
+): Record<"error", string> {
+  const error =
+    err instanceof Error
+      ? process.env.NODE_ENV !== "production"
+        ? err.message
+        : message
+      : "Unexpected Error";
+  return { error };
+}

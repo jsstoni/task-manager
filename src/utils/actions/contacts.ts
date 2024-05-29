@@ -3,6 +3,7 @@
 import { SchemaContactType } from "../constant/contacts";
 import { prisma } from "@/utils/libs/prisma";
 import { getSession } from "../libs/auth/options";
+import { handleServerError } from "../handle-error";
 
 export async function createContact(formData: SchemaContactType) {
   try {
@@ -20,17 +21,9 @@ export async function createContact(formData: SchemaContactType) {
       },
     });
 
-    console.log(contact);
-
     return contact;
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? process.env.NODE_ENV !== "production"
-          ? error.message
-          : "Create contacts error"
-        : "Unexpected Error";
-    return { error: message };
+    return handleServerError(error, "Create contacts error");
   }
 }
 

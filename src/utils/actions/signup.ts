@@ -3,6 +3,7 @@
 import bcrypt from "bcrypt";
 import { FormRegisterType } from "@/utils/constant/forms";
 import { prisma } from "@/utils/libs/prisma";
+import { handleServerError } from "../handle-error";
 
 export default async function signup(formData: FormRegisterType) {
   try {
@@ -16,12 +17,6 @@ export default async function signup(formData: FormRegisterType) {
     const { password: _, ...user } = create;
     return user;
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? process.env.NODE_ENV !== "production"
-          ? error.message
-          : "Register error"
-        : "Unexpected Error";
-    return { error: message };
+    return handleServerError(error, "Register error");
   }
 }
