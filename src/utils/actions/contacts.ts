@@ -1,12 +1,12 @@
 "use server";
 
-import { getServerSession } from "next-auth";
 import { SchemaContactType } from "../constant/contacts";
 import { prisma } from "@/utils/libs/prisma";
+import { getSession } from "../libs/auth/options";
 
 export async function createContact(formData: SchemaContactType) {
   try {
-    const session = await getServerSession();
+    const session = await getSession();
     if (!session || !session.user) {
       throw new Error("you don't have permissions");
     }
@@ -20,14 +20,31 @@ export async function createContact(formData: SchemaContactType) {
       },
     });
 
+    console.log(contact);
+
     return contact;
   } catch (error) {
     const message =
       error instanceof Error
         ? process.env.NODE_ENV !== "production"
           ? error.message
-          : "Contacts error"
+          : "Create contacts error"
         : "Unexpected Error";
     return { error: message };
   }
+}
+
+export async function getContacts() {
+  const session = await getSession();
+  if (!session || !session.user) {
+    throw new Error("you don't have permissions");
+  }
+
+  const contacts = await prisma.contacts.findMany({
+    where: {
+      user_id: session.user.user_id,
+    },
+  });
+
+  return contacts;
 }

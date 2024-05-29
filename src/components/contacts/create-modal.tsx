@@ -1,7 +1,7 @@
 "use client";
 
 import { BsPlusLg } from "react-icons/bs";
-import { Button, Modal, FormContact } from "@/components";
+import { Button, FormContact } from "@/components";
 import { useState } from "react";
 
 export function CreateModal() {
@@ -13,14 +13,7 @@ export function CreateModal() {
         <BsPlusLg />
       </Button>
 
-      <Modal
-        title="Create contact"
-        size="xs"
-        isOpen={open}
-        close={() => setOpen(false)}
-      >
-        <FormContact />
-      </Modal>
+      <FormContact open={open} close={() => setOpen(false)} />
     </>
   );
 }
