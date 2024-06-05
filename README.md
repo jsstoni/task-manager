@@ -1,6 +1,7 @@
 <h1 align="center">
   📋 Vanto
 </h1>
+<img src="https://i.ibb.co/0KLD3cm/task-manager.png" />
 
 Simplify communication on your projects and streamline task management designed to take your freelance work to the next level.
 
